@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:updatetest_nulableversion/Controladores/AddProdutor.dart';
-import 'package:updatetest_nulableversion/Model/ProdutorModel.dart';
+import 'package:updatetest_nulableversion/Controladores/TecnicoModule/AddTecnico.dart';
+import 'package:updatetest_nulableversion/Model/TecnicoModel.dart';
+import '../../WidgetsPersonalizados/TextFieldPersonalizado.dart';
 
-import '../TextFieldPersonalizado.dart';
-
-class AddPage extends StatefulWidget {
+class AddPageTecnico extends StatefulWidget {
   @override
-  _AddPageState createState() => _AddPageState();
+  _AddPageTecnicoState createState() => _AddPageTecnicoState();
 }
 
-class _AddPageState extends State<AddPage> {
+class _AddPageTecnicoState extends State<AddPageTecnico> {
   final TextEditingController nomeController = TextEditingController();
   final TextEditingController logradouroController = TextEditingController();
   final TextEditingController bairroLocalidadeController =
@@ -20,14 +19,15 @@ class _AddPageState extends State<AddPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController telefone1Controller = TextEditingController();
   final TextEditingController telefone2Controller = TextEditingController();
-  Future<Produtor>? _futureProdutor;
+  final TextEditingController creaController = TextEditingController();
+  Future<ResponsavelTecnico>? _futureRespTecnico;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: Text(
-          "Cadastro de Produtor",
+          "Cadastro de Responsável Técnico",
           style: TextStyle(
               fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
         ),
@@ -70,17 +70,18 @@ class _AddPageState extends State<AddPage> {
             CampoDeTextoAddPage("Estado", estadoController, 10),
             CampoDeTextoAddPage("Cidade", cidadeController, 10),
             CampoDeTextoAddPage("Cep", cepController, 8),
+            CampoDeTextoAddPage("Crea", creaController, 8),
             SizedBox(
               height: 22,
             ),
-            _futureProdutor == null ? Container() : Text("Funcionou!!"),
+            _futureRespTecnico == null ? Container() : Text("Funcionou!!"),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           setState(() {
-            _futureProdutor = criarProdutor(
+            _futureRespTecnico = criarRespTecnico(
                 nomeController.text,
                 logradouroController.text,
                 bairroLocalidadeController.text,
@@ -89,7 +90,8 @@ class _AddPageState extends State<AddPage> {
                 cepController.text,
                 emailController.text,
                 telefone1Controller.text,
-                telefone2Controller.text);
+                telefone2Controller.text,
+                creaController.text);
           });
         },
         child: Icon(Icons.arrow_forward_ios_sharp),

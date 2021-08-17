@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:updatetest_nulableversion/Controladores/DeleteProdutor.dart';
-import 'package:updatetest_nulableversion/Controladores/GetProdutor.dart';
+import 'package:updatetest_nulableversion/Controladores/ProdutorModule/DeleteProdutor.dart';
+import 'package:updatetest_nulableversion/Controladores/ProdutorModule/GetProdutor.dart';
 import 'package:updatetest_nulableversion/Model/ProdutorModel.dart';
 
 class DeletePage extends StatefulWidget {
