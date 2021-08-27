@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:updatetest_nulableversion/Telas/ProdutorModule/AddProdutorPage.dart';
+import 'package:updatetest_nulableversion/Telas/ProdutorModule/DeleteProdutorPage.dart';
+import 'package:updatetest_nulableversion/Telas/ProdutorModule/UpdatePage.dart';
 import 'package:updatetest_nulableversion/WidgetsPersonalizados/BotaoElevadoComNavegacao.dart';
 
 class ProdutorMainPage extends StatefulWidget {
@@ -24,15 +27,27 @@ class _ProdutorMainPageState extends State<ProdutorMainPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            BotaoElevadoComNavegacao("Adicionar Produtor", "/AddPage"),
+            BotaoElevadoComNavegacao(
+              texto: "Adicionar Produtor",
+              rota: "/AddPage",
+              pagina: AddPage(),
+            ),
             SizedBox(
               height: 10,
             ),
-            BotaoElevadoComNavegacao("Modificar Produtor", "/UpdatePage"),
+            BotaoElevadoComNavegacao(
+              texto: "Modificar Produtor",
+              rota: "PaginaEntidadeProdutor",
+              pagina: UpdatePage(),
+            ),
             SizedBox(
               height: 10,
             ),
-            BotaoElevadoComNavegacao("Remover um Produtor", "/DeletePage"),
+            BotaoElevadoComNavegacao(
+              texto: "Remover um Produtor",
+              rota: "PaginaEntidadeProdutor",
+              pagina: DeletePage(),
+            ),
             SizedBox(
               height: 10,
             ),

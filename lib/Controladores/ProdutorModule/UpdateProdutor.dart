@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:updatetest_nulableversion/Model/ProdutorModel.dart';
 
 Future<Produtor> updateProdutor(
+    String id,
     String nome,
     String logradouro,
     String bairroLocalidade,
@@ -14,7 +15,7 @@ Future<Produtor> updateProdutor(
     String telefone1,
     String telefone2) async {
   final response = await http.patch(
-    Uri.parse('https://caderno-de-campo-nestjs.herokuapp.com/produtores/20'),
+    Uri.parse('https://caderno-de-campo-nestjs.herokuapp.com/produtores/' + id),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },

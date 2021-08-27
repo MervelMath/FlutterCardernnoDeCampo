@@ -16,7 +16,7 @@ Future<ResponsavelTecnico> criarRespTecnico(
     String telefone2,
     String crea) async {
   final response = await http.post(
-    Uri.parse('https://caderno-de-campo-nestjs.herokuapp.com/resp-tecnico'),
+    Uri.parse('https://caderno-de-campo-nestjs.herokuapp.com/respTecnico'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },

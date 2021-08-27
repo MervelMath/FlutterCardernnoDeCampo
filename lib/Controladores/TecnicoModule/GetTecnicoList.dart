@@ -1,17 +1,20 @@
 import 'dart:convert';
 import 'dart:async';
 import 'package:http/http.dart' as http;
-import 'package:updatetest_nulableversion/Model/ProdutorModel.dart';
+import 'package:updatetest_nulableversion/Model/TecnicoModel.dart';
 
-Future<Produtor> fetchProdutor(String id) async {
+Future<List<ResponsavelTecnico>> fetchTecnicoList() async {
   final response = await http.get(
-    Uri.parse('https://caderno-de-campo-nestjs.herokuapp.com/produtores/' + id),
+    Uri.parse('https://caderno-de-campo-nestjs.herokuapp.com/respTecnico'),
   );
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    return Produtor.fromJson(jsonDecode(response.body));
+    List jsonResponse = json.decode(response.body);
+    return jsonResponse
+        .map((data) => new ResponsavelTecnico.fromJson(data))
+        .toList();
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.

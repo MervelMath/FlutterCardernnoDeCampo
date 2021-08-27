@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 class CampoDeTextoAddPage extends StatelessWidget {
+  final String valorCampo;
   final String fieldName;
   final int fieldSize;
   final TextEditingController fieldController;
-  const CampoDeTextoAddPage(
-      this.fieldName, this.fieldController, this.fieldSize);
+  CampoDeTextoAddPage(
+      this.fieldName, this.fieldController, this.fieldSize, this.valorCampo);
   @override
   Widget build(BuildContext context) {
     return Column(children: [

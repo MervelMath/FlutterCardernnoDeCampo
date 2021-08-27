@@ -6,8 +6,14 @@ import 'package:updatetest_nulableversion/Model/ProdutorModel.dart';
 import '../../WidgetsPersonalizados/TextFieldPersonalizado.dart';
 
 class UpdatePage extends StatefulWidget {
+  final String?
+      idUsuario; //preciso rever a necessidade desse parâmetro ser opcional.
+
+  UpdatePage({Key? key, this.idUsuario}) : super(key: key);
+  void verifica() {}
+
   @override
-  _UpdatePageState createState() => _UpdatePageState();
+  _UpdatePageState createState() => _UpdatePageState(idUsuario!);
 }
 
 class _UpdatePageState extends State<UpdatePage> {
@@ -23,10 +29,15 @@ class _UpdatePageState extends State<UpdatePage> {
   final TextEditingController telefone2Controller = TextEditingController();
   late Future<Produtor> _futureProdutor;
 
+  late String id = "0";
+  _UpdatePageState(String idUsuario) {
+    id = idUsuario;
+  }
+
   @override
   void initState() {
     super.initState();
-    _futureProdutor = fetchProdutor();
+    _futureProdutor = fetchProdutor(id);
   }
 
   @override
@@ -43,6 +54,16 @@ class _UpdatePageState extends State<UpdatePage> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData) {
+                nomeController.text = snapshot.data!.nome;
+                logradouroController.text = snapshot.data!.logradouro;
+                bairroLocalidadeController.text =
+                    snapshot.data!.bairroLocalidade;
+                cidadeController.text = snapshot.data!.cidade;
+                estadoController.text = snapshot.data!.estado;
+                cepController.text = snapshot.data!.cep;
+                emailController.text = snapshot.data!.email;
+                telefone1Controller.text = snapshot.data!.telefone1;
+                telefone2Controller.text = snapshot.data!.telefone2;
                 return ListView(
                   children: <Widget>[
                     Text(snapshot.data!.nome),
@@ -59,8 +80,10 @@ class _UpdatePageState extends State<UpdatePage> {
                     SizedBox(
                       height: 10,
                     ),
-                    CampoDeTextoAddPage("Nome", nomeController, 10),
-                    CampoDeTextoAddPage("Email", emailController, 10),
+                    CampoDeTextoAddPage(
+                        "Nome", nomeController, 10, snapshot.data!.nome),
+                    CampoDeTextoAddPage(
+                        "Email", emailController, 10, snapshot.data!.email),
                     Text(
                       "Endereço:",
                       style: TextStyle(
@@ -71,12 +94,19 @@ class _UpdatePageState extends State<UpdatePage> {
                     SizedBox(
                       height: 10,
                     ),
-                    CampoDeTextoAddPage("Logradouro", logradouroController, 10),
+                    CampoDeTextoAddPage("Logradouro", logradouroController, 10,
+                        snapshot.data!.logradouro),
                     CampoDeTextoAddPage(
-                        "Bairro/Localidade", bairroLocalidadeController, 10),
-                    CampoDeTextoAddPage("Estado", estadoController, 10),
-                    CampoDeTextoAddPage("Cidade", cidadeController, 10),
-                    CampoDeTextoAddPage("Cep", cepController, 8),
+                        "Bairro/Localidade",
+                        bairroLocalidadeController,
+                        10,
+                        snapshot.data!.bairroLocalidade),
+                    CampoDeTextoAddPage(
+                        "Estado", estadoController, 10, snapshot.data!.estado),
+                    CampoDeTextoAddPage(
+                        "Cidade", cidadeController, 10, snapshot.data!.cidade),
+                    CampoDeTextoAddPage(
+                        "Cep", cepController, 8, snapshot.data!.cep),
                     SizedBox(
                       height: 22,
                     ),
@@ -84,6 +114,7 @@ class _UpdatePageState extends State<UpdatePage> {
                       onPressed: () {
                         setState(() {
                           _futureProdutor = updateProdutor(
+                              snapshot.data!.idProdutor.toString(),
                               nomeController.text,
                               logradouroController.text,
                               bairroLocalidadeController.text,

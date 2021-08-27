@@ -3,8 +3,10 @@ import 'package:updatetest_nulableversion/Telas/ProdutorModule/AddProdutorPage.d
 import 'package:updatetest_nulableversion/Telas/ProdutorModule/DeleteProdutorPage.dart';
 import 'package:updatetest_nulableversion/Telas/ProdutorModule/UpdatePage.dart';
 import 'package:updatetest_nulableversion/Telas/TecnicoModule/DeletePageTecnico.dart';
+import 'package:updatetest_nulableversion/Telas/TecnicoModule/ListTecnicoPage.dart';
 import 'package:updatetest_nulableversion/Telas/TecnicoModule/UpdatePageTecnico.dart';
 
+import 'Telas/ProdutorModule/ListProdutoresPage.dart';
 import 'Telas/ProdutorModule/ProdutorMainPage.dart';
 import 'Telas/TecnicoModule/AddPageTecnico.dart';
 import 'Telas/TecnicoModule/TecnicoMainPage.dart';
@@ -20,13 +22,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Tela Adicionar Produtor',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blueGrey,
       ),
       initialRoute: "/",
       routes: {
         "/": (context) => HomePage(),
-        "/ProdutorPage": (context) => ProdutorMainPage(),
-        "/TecnicoPage": (context) => TecnicoMainPage(),
+        "/ProdutorPage": (context) =>
+            ListProdutoresPage(), //ProdutorMainPage(),
+        "/TecnicoPage": (context) => ListTecnicosPage(), //TecnicoMainPage(),
         "/AddPage": (context) => AddPage(),
         "/UpdatePage": (context) => UpdatePage(),
         "/DeletePage": (context) => DeletePage(),
@@ -42,33 +45,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: Container(
-          padding: const EdgeInsets.all(8.0),
-          alignment: Alignment.center,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                child: Text('Produtores'),
-                onPressed: () {
-                  Navigator.of(context).pushNamed("/ProdutorPage");
-                },
-                style: ElevatedButton.styleFrom(minimumSize: Size(200, 50)),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              ElevatedButton(
-                child: Text('Responsáveis Técnicos'),
-                onPressed: () {
-                  Navigator.of(context).pushNamed("/TecnicoPage");
-                },
-                style: ElevatedButton.styleFrom(minimumSize: Size(200, 50)),
-              ),
-            ],
-          ),
-        ),
+      body: Container(
+        padding: const EdgeInsets.all(8.0),
+        alignment: Alignment.center,
       ),
       appBar: AppBar(
         title: Text(
@@ -78,9 +57,42 @@ class HomePage extends StatelessWidget {
         ),
         backgroundColor: Colors.blue[300],
       ),
-      body: Container(
-        padding: const EdgeInsets.all(8.0),
-        alignment: Alignment.center,
+      drawer: Drawer(
+        child: Column(
+          children: [
+            UserAccountsDrawerHeader(
+              currentAccountPicture: Icon(Icons.account_circle, size: 50),
+              accountName: Text("accountName"),
+              accountEmail: Text("accountEmail"),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            ListTile(
+              trailing: Icon(Icons.keyboard_arrow_right_outlined, size: 38),
+              title: Text(
+                'Produtores',
+                style: TextStyle(fontSize: 20),
+              ),
+              onTap: () {
+                Navigator.of(context).pushNamed("/ProdutorPage");
+              },
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            ListTile(
+              trailing: Icon(Icons.keyboard_arrow_right_outlined, size: 38),
+              title: Text(
+                'Responsáveis Técnicos',
+                style: TextStyle(fontSize: 20),
+              ),
+              onTap: () {
+                Navigator.of(context).pushNamed("/TecnicoPage");
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

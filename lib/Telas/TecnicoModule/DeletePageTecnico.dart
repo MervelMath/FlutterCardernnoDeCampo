@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:updatetest_nulableversion/Controladores/ProdutorModule/DeleteProdutor.dart';
+import 'package:updatetest_nulableversion/Controladores/TecnicoModule/DeleteTecnico.dart';
 import 'package:updatetest_nulableversion/Controladores/TecnicoModule/GetTecnico.dart';
 import 'package:updatetest_nulableversion/Model/TecnicoModel.dart';
 
 class DeletePageTecnico extends StatefulWidget {
+  final String? idUsuario;
+
+  DeletePageTecnico({Key? key, this.idUsuario}) : super(key: key);
   @override
-  _DeletePageTecnicoState createState() => _DeletePageTecnicoState();
+  _DeletePageTecnicoState createState() => _DeletePageTecnicoState(idUsuario!);
 }
 
 class _DeletePageTecnicoState extends State<DeletePageTecnico> {
   late Future<ResponsavelTecnico> _futureTecnico;
 
+  late String id = "0";
+  _DeletePageTecnicoState(String idUsuario) {
+    id = idUsuario;
+  }
+
   @override
   void initState() {
     super.initState();
-    _futureTecnico = fetchTecnico();
+    _futureTecnico = fetchTecnico(id);
   }
 
   @override
@@ -39,7 +47,7 @@ class _DeletePageTecnicoState extends State<DeletePageTecnico> {
                       child: Text('Delete Data'),
                       onPressed: () {
                         setState(() {
-                          deleteProdutor(
+                          deleteTecnico(
                               snapshot.data!.idRespTecnico.toString());
                         });
                       },
@@ -52,7 +60,7 @@ class _DeletePageTecnicoState extends State<DeletePageTecnico> {
             }
 
             // By default, show a loading spinner.
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           },
         ),
       ),

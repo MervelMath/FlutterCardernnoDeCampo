@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:http/http.dart' as http;
 
-Future<http.Response> deleteProdutor(String idTecnico) async {
+Future<http.Response> deleteTecnico(String idTecnico) async {
   final http.Response response = await http.delete(
     Uri.parse(
-        'https://caderno-de-campo-nestjs.herokuapp.com/resp-tecnico/$idTecnico'),
+        'https://caderno-de-campo-nestjs.herokuapp.com/respTecnico/$idTecnico'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },

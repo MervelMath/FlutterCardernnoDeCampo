@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:updatetest_nulableversion/Telas/TecnicoModule/DeletePageTecnico.dart';
+import 'package:updatetest_nulableversion/Telas/TecnicoModule/UpdatePageTecnico.dart';
 import 'package:updatetest_nulableversion/WidgetsPersonalizados/BotaoElevadoComNavegacao.dart';
 
 class TecnicoMainPage extends StatefulWidget {
@@ -24,15 +26,26 @@ class _TecnicoMainPageState extends State<TecnicoMainPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            BotaoElevadoComNavegacao("Adicionar Tecnico", "/AddPageTecnico"),
+            BotaoElevadoComNavegacao(
+              rota: '/AddPageTecnico',
+              texto: 'Adicionar Tecnico',
+            ),
             SizedBox(
               height: 10,
             ),
-            BotaoElevadoComNavegacao("Remover Tecnico", "/DeletePageTecnico"),
+            BotaoElevadoComNavegacao(
+              texto: "Modificar Tecnico",
+              rota: "PaginaEntidadeTecnico",
+              pagina: UpdatePageTecnico(),
+            ),
             SizedBox(
               height: 10,
             ),
-            BotaoElevadoComNavegacao("Modificar Tecnico", "/UpdatePageTecnico"),
+            BotaoElevadoComNavegacao(
+              rota: "PaginaEntidadeTecnico",
+              texto: "Remover Tecnico",
+              pagina: DeletePageTecnico(),
+            ),
           ],
         ),
       ),

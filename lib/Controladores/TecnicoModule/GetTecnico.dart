@@ -3,9 +3,10 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'package:updatetest_nulableversion/Model/TecnicoModel.dart';
 
-Future<ResponsavelTecnico> fetchTecnico() async {
+Future<ResponsavelTecnico> fetchTecnico(String id) async {
   final response = await http.get(
-    Uri.parse('https://caderno-de-campo-nestjs.herokuapp.com/resp-tecnico/20'),
+    Uri.parse(
+        'https://caderno-de-campo-nestjs.herokuapp.com/respTecnico/' + id),
   );
 
   if (response.statusCode == 200) {

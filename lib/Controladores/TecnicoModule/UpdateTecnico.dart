@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:updatetest_nulableversion/Model/TecnicoModel.dart';
 
 Future<ResponsavelTecnico> updateTecnico(
+    String id,
     String nome,
     String logradouro,
     String bairroLocalidade,
@@ -16,7 +17,8 @@ Future<ResponsavelTecnico> updateTecnico(
     String telefone2,
     String crea) async {
   final response = await http.patch(
-    Uri.parse('https://caderno-de-campo-nestjs.herokuapp.com/resp-tecnico/20'),
+    Uri.parse(
+        'https://caderno-de-campo-nestjs.herokuapp.com/respTecnico/' + id),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },

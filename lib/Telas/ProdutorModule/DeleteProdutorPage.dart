@@ -4,17 +4,24 @@ import 'package:updatetest_nulableversion/Controladores/ProdutorModule/GetProdut
 import 'package:updatetest_nulableversion/Model/ProdutorModel.dart';
 
 class DeletePage extends StatefulWidget {
+  final String? idUsuario;
+
+  DeletePage({Key? key, this.idUsuario}) : super(key: key);
   @override
-  _DeletePageState createState() => _DeletePageState();
+  _DeletePageState createState() => _DeletePageState(idUsuario!);
 }
 
 class _DeletePageState extends State<DeletePage> {
   late Future<Produtor> _futureProdutor;
+  late String id = "0";
+  _DeletePageState(String idUsuario) {
+    id = idUsuario;
+  }
 
   @override
   void initState() {
     super.initState();
-    _futureProdutor = fetchProdutor();
+    _futureProdutor = fetchProdutor(id);
   }
 
   @override

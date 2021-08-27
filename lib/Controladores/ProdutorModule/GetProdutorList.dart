@@ -3,15 +3,16 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'package:updatetest_nulableversion/Model/ProdutorModel.dart';
 
-Future<Produtor> fetchProdutor() async {
+Future<List<Produtor>> fetchProdutorList() async {
   final response = await http.get(
-    Uri.parse('https://caderno-de-campo-nestjs.herokuapp.com/produtores/20'),
+    Uri.parse('https://caderno-de-campo-nestjs.herokuapp.com/produtores'),
   );
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    return Produtor.fromJson(jsonDecode(response.body));
+    List jsonResponse = json.decode(response.body);
+    return jsonResponse.map((data) => new Produtor.fromJson(data)).toList();
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.
