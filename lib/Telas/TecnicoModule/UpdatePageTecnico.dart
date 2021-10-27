@@ -121,7 +121,7 @@ class _UpdatePageState extends State<UpdatePageTecnico> {
                       onPressed: () {
                         setState(() {
                           _futureRespTecnico = updateTecnico(
-                              snapshot.data!.idRespTecnico.toString(),
+                              snapshot.data!.id.toString(),
                               nomeController.text,
                               logradouroController.text,
                               bairroLocalidadeController.text,

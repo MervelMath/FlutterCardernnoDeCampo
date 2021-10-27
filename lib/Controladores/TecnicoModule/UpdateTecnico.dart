@@ -16,9 +16,8 @@ Future<ResponsavelTecnico> updateTecnico(
     String telefone1,
     String telefone2,
     String crea) async {
-  final response = await http.patch(
-    Uri.parse(
-        'https://caderno-de-campo-nestjs.herokuapp.com/respTecnico/' + id),
+  final response = await http.put(
+    Uri.parse('https://caderno-campo.herokuapp.com/respTecnico/' + id),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },

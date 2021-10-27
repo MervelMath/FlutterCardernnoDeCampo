@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'package:http/http.dart' as http;
 
-Future<http.Response> deleteProdutor(String idProdutor) async {
+Future<http.Response> deletePomar(String idPomar) async {
   final http.Response response = await http.delete(
-    Uri.parse('https://caderno-campo.herokuapp.com/produtor/$idProdutor'),
+    Uri.parse('https://caderno-campo.herokuapp.com/pomar/$idPomar'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
   );
 
-  if (response.statusCode == 204) {
+  if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON. After deleting,
     // you'll get an empty JSON `{}` response.

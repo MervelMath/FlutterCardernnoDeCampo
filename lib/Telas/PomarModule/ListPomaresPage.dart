@@ -1,30 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:updatetest_nulableversion/Controladores/ProdutorModule/GetProdutorList.dart';
-import 'package:updatetest_nulableversion/Model/ProdutorModel.dart';
-import 'package:updatetest_nulableversion/Telas/PomarModule/ListPomaresPage.dart';
-import 'package:updatetest_nulableversion/Telas/ProdutorModule/AddPageProdutor.dart';
-import 'package:updatetest_nulableversion/Telas/ProdutorModule/DeleteProdutorPage.dart';
-import 'package:updatetest_nulableversion/Telas/ProdutorModule/UpdatePage.dart';
+import 'package:updatetest_nulableversion/Controladores/PomarModule/GetPomarList.dart';
+import 'package:updatetest_nulableversion/Model/PomarModel.dart';
+import 'package:updatetest_nulableversion/Telas/TecnicoModule/ListTecnicoPage.dart';
 
-class ListProdutoresPage extends StatefulWidget {
+import 'AddPagePomar.dart';
+import 'DeletePagePomar.dart';
+import 'UpdatePagePomar.dart';
+
+class ListPomaresPage extends StatefulWidget {
+  final String? idUsuario;
+
+  ListPomaresPage({Key? key, this.idUsuario}) : super(key: key);
   @override
-  _ListProdutoresPageState createState() => _ListProdutoresPageState();
+  _ListPomaresPageState createState() => _ListPomaresPageState(idUsuario);
 }
 
-class _ListProdutoresPageState extends State<ListProdutoresPage> {
-  Future<List<Produtor>>? _futureProdutor;
+class _ListPomaresPageState extends State<ListPomaresPage> {
+  Future<List<Pomar>>? _futurePomar;
+
+  late String id = "0";
+  _ListPomaresPageState(String? idUsuario) {
+    if (idUsuario != "null") id = idUsuario!;
+  }
 
   @override
   void initState() {
     super.initState();
-    _futureProdutor = fetchProdutorList();
+    if (id != "0")
+      _futurePomar = fetchPomarList(id);
+    else
+      _futurePomar = fetchPomarList("0");
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Fetch Data Example',
+      title: 'Lista de Pomares',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -35,7 +47,10 @@ class _ListProdutoresPageState extends State<ListProdutoresPage> {
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AddPage(),
+                  builder: (context) => ListTecnicosPage(
+                    ativarBotoes: false,
+                    idProdutor: id,
+                  ),
                 ),
               ),
               icon: Icon(
@@ -48,34 +63,21 @@ class _ListProdutoresPageState extends State<ListProdutoresPage> {
             icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          title: const Text('Lista de Produtores'),
+          title: const Text('Lista de Pomares'),
         ),
         body: Center(
-          child: FutureBuilder<List<Produtor>>(
-            future: _futureProdutor,
+          child: FutureBuilder<List<Pomar>>(
+            future: _futurePomar,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                List<Produtor>? produtores = snapshot.data;
+                List<Pomar>? pomares = snapshot.data;
                 return ListView.builder(
-                    itemCount: produtores!.length,
+                    itemCount: pomares!.length,
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
                         trailing: Wrap(
                           spacing: 12,
                           children: [
-                            IconButton(
-                              icon: Icon(
-                                Icons.local_florist_rounded,
-                                size: 30,
-                              ),
-                              onPressed: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ListPomaresPage(
-                                        idUsuario:
-                                            produtores[index].id.toString())),
-                              ),
-                            ),
                             IconButton(
                               icon: Icon(
                                 Icons.delete,
@@ -84,9 +86,8 @@ class _ListProdutoresPageState extends State<ListProdutoresPage> {
                               onPressed: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => DeletePage(
-                                        idUsuario:
-                                            produtores[index].id.toString())),
+                                    builder: (context) => DeletePagePomar(
+                                        idPomar: pomares[index].id.toString())),
                               ),
                             ),
                             IconButton(
@@ -97,16 +98,15 @@ class _ListProdutoresPageState extends State<ListProdutoresPage> {
                               onPressed: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => UpdatePage(
-                                        idUsuario:
-                                            produtores[index].id.toString())),
+                                    builder: (context) => UpdatePagePomar(
+                                        id: pomares[index].id.toString())),
                               ),
                             ),
                           ],
                         ),
                         leading: Icon(Icons.account_circle, size: 40),
-                        title: Text(produtores[index].nome),
-                        subtitle: Text(produtores[index].email),
+                        title: Text(pomares[index].nome),
+                        subtitle: Text(pomares[index].cidade),
                       );
                     });
               } else if (snapshot.hasError) {

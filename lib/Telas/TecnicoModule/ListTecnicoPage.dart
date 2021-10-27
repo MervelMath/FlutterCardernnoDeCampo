@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:updatetest_nulableversion/Controladores/TecnicoModule/GetTecnicoList.dart';
 import 'package:updatetest_nulableversion/Model/TecnicoModel.dart';
+import 'package:updatetest_nulableversion/Telas/PomarModule/AddPagePomar.dart';
 import 'package:updatetest_nulableversion/Telas/TecnicoModule/AddPageTecnico.dart';
 import 'package:updatetest_nulableversion/Telas/TecnicoModule/DeletePageTecnico.dart';
 import 'package:updatetest_nulableversion/Telas/TecnicoModule/UpdatePageTecnico.dart';
 
 class ListTecnicosPage extends StatefulWidget {
+  final bool? ativarBotoes;
+  final String? idProdutor;
+  ListTecnicosPage({Key? key, this.ativarBotoes, this.idProdutor})
+      : super(key: key);
   @override
-  _ListTecnicosPageState createState() => _ListTecnicosPageState();
+  _ListTecnicosPageState createState() =>
+      _ListTecnicosPageState(ativarBotoes, idProdutor);
 }
 
 class _ListTecnicosPageState extends State<ListTecnicosPage> {
   Future<List<ResponsavelTecnico>>? _futureTecnico;
+  late bool ativarCampos = false;
+  late String idProdutor = "0";
+  _ListTecnicosPageState(bool? ativarCampos, String? idProdutor) {
+    if (ativarCampos != null) this.ativarCampos = ativarCampos;
+    if (idProdutor != null) this.idProdutor = idProdutor;
+  }
 
   @override
   void initState() {
@@ -58,43 +70,67 @@ class _ListTecnicosPageState extends State<ListTecnicosPage> {
                 return ListView.builder(
                     itemCount: tecnicos!.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return ListTile(
-                        trailing: Wrap(
-                          spacing: 12,
-                          children: [
-                            IconButton(
-                              icon: Icon(
-                                Icons.delete,
-                                size: 30,
+                      if (ativarCampos == true) {
+                        return ListTile(
+                          trailing: Wrap(
+                            spacing: 12,
+                            children: [
+                              IconButton(
+                                icon: Icon(
+                                  Icons.delete,
+                                  size: 30,
+                                ),
+                                onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => DeletePageTecnico(
+                                          idUsuario:
+                                              tecnicos[index].id.toString())),
+                                ),
                               ),
-                              onPressed: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DeletePageTecnico(
-                                        idUsuario: tecnicos[index]
-                                            .idRespTecnico
-                                            .toString())),
+                              IconButton(
+                                icon: Icon(
+                                  Icons.mode_outlined,
+                                  size: 30,
+                                ),
+                                onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => UpdatePageTecnico(
+                                          idUsuario:
+                                              tecnicos[index].id.toString())),
+                                ),
                               ),
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.mode_outlined,
-                                size: 30,
+                            ],
+                          ),
+                          title: Text(tecnicos[index].nome),
+                          subtitle: Text(tecnicos[index].email),
+                        );
+                      } else {
+                        return ListTile(
+                          trailing: Wrap(
+                            spacing: 12,
+                            children: [
+                              IconButton(
+                                icon: Icon(
+                                  Icons.add,
+                                  size: 30,
+                                ),
+                                onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AddPagePomar(
+                                          idProdutor: idProdutor,
+                                          idTecnico:
+                                              tecnicos[index].id.toString())),
+                                ),
                               ),
-                              onPressed: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => UpdatePageTecnico(
-                                        idUsuario: tecnicos[index]
-                                            .idRespTecnico
-                                            .toString())),
-                              ),
-                            ),
-                          ],
-                        ),
-                        title: Text(tecnicos[index].nome),
-                        subtitle: Text(tecnicos[index].email),
-                      );
+                            ],
+                          ),
+                          title: Text(tecnicos[index].nome),
+                          subtitle: Text(tecnicos[index].email),
+                        );
+                      }
                     });
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');

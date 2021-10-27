@@ -1,5 +1,5 @@
 class ResponsavelTecnico {
-  final int idRespTecnico;
+  final int id;
   final String nome;
   final String logradouro;
   final String bairroLocalidade;
@@ -12,7 +12,7 @@ class ResponsavelTecnico {
   final String crea;
 
   ResponsavelTecnico({
-    required this.idRespTecnico,
+    required this.id,
     required this.nome,
     required this.logradouro,
     required this.bairroLocalidade,
@@ -27,7 +27,7 @@ class ResponsavelTecnico {
 
   factory ResponsavelTecnico.fromJson(Map<String, dynamic> json) {
     return ResponsavelTecnico(
-      idRespTecnico: json["IDRespTecnico"],
+      id: json["id"],
       nome: json["nome"],
       logradouro: json["logradouro"],
       bairroLocalidade: json["bairro_localidade"],
@@ -40,4 +40,17 @@ class ResponsavelTecnico {
       crea: json["crea"],
     );
   }
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "nome": nome,
+        "logradouro": logradouro,
+        "bairro_localidade": bairroLocalidade,
+        "cidade": cidade,
+        "estado": estado,
+        "cep": cep,
+        "email": email,
+        "telefone1": telefone1,
+        "telefone2": telefone2,
+        "crea": crea,
+      };
 }

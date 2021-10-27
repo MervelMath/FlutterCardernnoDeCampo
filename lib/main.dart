@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:updatetest_nulableversion/Telas/ProdutorModule/AddProdutorPage.dart';
+import 'package:updatetest_nulableversion/Telas/PomarModule/ListPomaresPage.dart';
+import 'package:updatetest_nulableversion/Telas/ProdutorModule/AddPageProdutor.dart';
 import 'package:updatetest_nulableversion/Telas/ProdutorModule/DeleteProdutorPage.dart';
 import 'package:updatetest_nulableversion/Telas/ProdutorModule/UpdatePage.dart';
 import 'package:updatetest_nulableversion/Telas/TecnicoModule/DeletePageTecnico.dart';
 import 'package:updatetest_nulableversion/Telas/TecnicoModule/ListTecnicoPage.dart';
 import 'package:updatetest_nulableversion/Telas/TecnicoModule/UpdatePageTecnico.dart';
-
 import 'Telas/ProdutorModule/ListProdutoresPage.dart';
-import 'Telas/ProdutorModule/ProdutorMainPage.dart';
 import 'Telas/TecnicoModule/AddPageTecnico.dart';
-import 'Telas/TecnicoModule/TecnicoMainPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,6 +28,7 @@ class MyApp extends StatelessWidget {
         "/ProdutorPage": (context) =>
             ListProdutoresPage(), //ProdutorMainPage(),
         "/TecnicoPage": (context) => ListTecnicosPage(), //TecnicoMainPage(),
+        "/PomarPage": (context) => ListPomaresPage(),
         "/AddPage": (context) => AddPage(),
         "/UpdatePage": (context) => UpdatePage(),
         "/DeletePage": (context) => DeletePage(),
@@ -76,6 +75,19 @@ class HomePage extends StatelessWidget {
               ),
               onTap: () {
                 Navigator.of(context).pushNamed("/ProdutorPage");
+              },
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            ListTile(
+              trailing: Icon(Icons.keyboard_arrow_right_outlined, size: 38),
+              title: Text(
+                'Pomares',
+                style: TextStyle(fontSize: 20),
+              ),
+              onTap: () {
+                Navigator.of(context).pushNamed("/PomarPage");
               },
             ),
             SizedBox(

@@ -5,7 +5,7 @@ import 'package:updatetest_nulableversion/Model/ProdutorModel.dart';
 
 Future<List<Produtor>> fetchProdutorList() async {
   final response = await http.get(
-    Uri.parse('https://caderno-de-campo-nestjs.herokuapp.com/produtores'),
+    Uri.parse('https://caderno-campo.herokuapp.com/produtor'),
   );
 
   if (response.statusCode == 200) {

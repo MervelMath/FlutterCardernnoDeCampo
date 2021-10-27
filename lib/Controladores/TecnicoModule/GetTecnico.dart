@@ -5,8 +5,7 @@ import 'package:updatetest_nulableversion/Model/TecnicoModel.dart';
 
 Future<ResponsavelTecnico> fetchTecnico(String id) async {
   final response = await http.get(
-    Uri.parse(
-        'https://caderno-de-campo-nestjs.herokuapp.com/respTecnico/' + id),
+    Uri.parse('https://caderno-campo.herokuapp.com/respTecnico/' + id),
   );
 
   if (response.statusCode == 200) {

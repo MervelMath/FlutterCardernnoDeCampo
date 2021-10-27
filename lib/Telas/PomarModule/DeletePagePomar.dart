@@ -1,38 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:updatetest_nulableversion/Controladores/ProdutorModule/DeleteProdutor.dart';
-import 'package:updatetest_nulableversion/Controladores/ProdutorModule/GetProdutor.dart';
-import 'package:updatetest_nulableversion/Model/ProdutorModel.dart';
+import 'package:updatetest_nulableversion/Controladores/PomarModule/DeletePomar.dart';
+import 'package:updatetest_nulableversion/Controladores/PomarModule/GetPomar.dart';
+import 'package:updatetest_nulableversion/Model/PomarModel.dart';
 
-class DeletePage extends StatefulWidget {
-  final String? idUsuario;
+class DeletePagePomar extends StatefulWidget {
+  final String? idPomar;
 
-  DeletePage({Key? key, this.idUsuario}) : super(key: key);
+  DeletePagePomar({Key? key, this.idPomar}) : super(key: key);
   @override
-  _DeletePageState createState() => _DeletePageState(idUsuario!);
+  _DeletePagePomarState createState() => _DeletePagePomarState(idPomar!);
 }
 
-class _DeletePageState extends State<DeletePage> {
-  late Future<Produtor> _futureProdutor;
+class _DeletePagePomarState extends State<DeletePagePomar> {
+  late Future<Pomar> _futurePomar;
   late String id = "0";
-  _DeletePageState(String idUsuario) {
-    id = idUsuario;
+  _DeletePagePomarState(String idPomar) {
+    id = idPomar;
   }
 
   @override
   void initState() {
     super.initState();
-    _futureProdutor = fetchProdutor(id);
+    _futurePomar = fetchPomar(id);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Delete Data Example'),
+        title: Text('Excluir Pomar'),
       ),
       body: Center(
-        child: FutureBuilder<Produtor>(
-          future: _futureProdutor,
+        child: FutureBuilder<Pomar>(
+          future: _futurePomar,
           builder: (context, snapshot) {
             // If the connection is done,
             // check for response data or an error.
@@ -46,7 +46,7 @@ class _DeletePageState extends State<DeletePage> {
                       child: Text('Delete Data'),
                       onPressed: () {
                         setState(() {
-                          deleteProdutor(snapshot.data!.id.toString());
+                          deletePomar(snapshot.data!.id.toString());
                         });
                       },
                     ),
@@ -56,7 +56,6 @@ class _DeletePageState extends State<DeletePage> {
                 return Text("${snapshot.error}");
               }
             }
-
             // By default, show a loading spinner.
             return CircularProgressIndicator();
           },

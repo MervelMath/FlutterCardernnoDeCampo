@@ -15,7 +15,7 @@ Future<Produtor> criarProdutor(
     String telefone1,
     String telefone2) async {
   final response = await http.post(
-    Uri.parse('https://caderno-de-campo-nestjs.herokuapp.com/produtores'),
+    Uri.parse('https://caderno-campo.herokuapp.com/produtor'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },

@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:updatetest_nulableversion/Controladores/PomarModule/GetPomar.dart';
+import 'package:updatetest_nulableversion/Controladores/PomarModule/UpdatePomar.dart';
 import 'package:updatetest_nulableversion/Controladores/ProdutorModule/GetProdutor.dart';
-import 'package:updatetest_nulableversion/Controladores/ProdutorModule/UpdateProdutor.dart';
+import 'package:updatetest_nulableversion/Controladores/TecnicoModule/GetTecnico.dart';
+import 'package:updatetest_nulableversion/Model/PomarModel.dart';
 import 'package:updatetest_nulableversion/Model/ProdutorModel.dart';
+import 'package:updatetest_nulableversion/Model/TecnicoModel.dart';
 
 import '../../WidgetsPersonalizados/TextFieldPersonalizado.dart';
 
-class UpdatePage extends StatefulWidget {
-  final String?
-      idUsuario; //preciso rever a necessidade desse parâmetro ser opcional.
+class UpdatePagePomar extends StatefulWidget {
+  final String? id; //preciso rever a necessidade desse parâmetro ser opcional.
 
-  UpdatePage({Key? key, this.idUsuario}) : super(key: key);
+  UpdatePagePomar({Key? key, this.id}) : super(key: key);
   void verifica() {}
 
   @override
-  _UpdatePageState createState() => _UpdatePageState(idUsuario!);
+  _UpdatePagePomarState createState() => _UpdatePagePomarState(id!);
 }
 
-class _UpdatePageState extends State<UpdatePage> {
+class _UpdatePagePomarState extends State<UpdatePagePomar> {
   final TextEditingController nomeController = TextEditingController();
   final TextEditingController logradouroController = TextEditingController();
   final TextEditingController bairroLocalidadeController =
@@ -24,33 +27,34 @@ class _UpdatePageState extends State<UpdatePage> {
   final TextEditingController cidadeController = TextEditingController();
   final TextEditingController estadoController = TextEditingController();
   final TextEditingController cepController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController telefone1Controller = TextEditingController();
-  final TextEditingController telefone2Controller = TextEditingController();
-  late Future<Produtor> _futureProdutor;
+  final TextEditingController produtorController = TextEditingController();
+  final TextEditingController respTecnicoController = TextEditingController();
+  late Future<Pomar> _futurePomar;
+  late Produtor produtor;
+  late ResponsavelTecnico respTecnico;
 
   late String id = "0";
-  _UpdatePageState(String idUsuario) {
-    id = idUsuario;
+  _UpdatePagePomarState(String id) {
+    this.id = id;
   }
 
   @override
   void initState() {
     super.initState();
-    _futureProdutor = fetchProdutor(id);
+    _futurePomar = fetchPomar(id);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Update Data Example'),
+        title: Text('Editar Pomar'),
       ),
       body: Container(
         alignment: Alignment.center,
         padding: const EdgeInsets.all(8.0),
-        child: FutureBuilder<Produtor>(
-          future: _futureProdutor,
+        child: FutureBuilder<Pomar>(
+          future: _futurePomar,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData) {
@@ -61,9 +65,8 @@ class _UpdatePageState extends State<UpdatePage> {
                 cidadeController.text = snapshot.data!.cidade;
                 estadoController.text = snapshot.data!.estado;
                 cepController.text = snapshot.data!.cep;
-                emailController.text = snapshot.data!.email;
-                telefone1Controller.text = snapshot.data!.telefone1;
-                telefone2Controller.text = snapshot.data!.telefone2;
+                // produtorController.text = snapshot.data!.produtor!.nome;
+                //  respTecnicoController.text = snapshot.data!.respTecnico!.nome;
                 return ListView(
                   children: <Widget>[
                     Text(snapshot.data!.nome),
@@ -82,8 +85,13 @@ class _UpdatePageState extends State<UpdatePage> {
                     ),
                     CampoDeTextoAddPage(
                         "Nome", nomeController, 10, snapshot.data!.nome),
+                    CampoDeTextoAddPage("Produtor", produtorController, 10,
+                        snapshot.data!.nome.toString()),
                     CampoDeTextoAddPage(
-                        "Email", emailController, 10, snapshot.data!.email),
+                        "Responsável Técnico",
+                        respTecnicoController,
+                        10,
+                        snapshot.data!.nome.toString()),
                     Text(
                       "Endereço:",
                       style: TextStyle(
@@ -113,7 +121,13 @@ class _UpdatePageState extends State<UpdatePage> {
                     ElevatedButton(
                       onPressed: () {
                         setState(() {
-                          _futureProdutor = updateProdutor(
+                          fetchProdutor("25").then((result) {
+                            produtor = result;
+                          });
+                          fetchTecnico("3").then((result) {
+                            respTecnico = result;
+                          });
+                          _futurePomar = updatePomar(
                               snapshot.data!.id.toString(),
                               nomeController.text,
                               logradouroController.text,
@@ -121,9 +135,8 @@ class _UpdatePageState extends State<UpdatePage> {
                               cidadeController.text,
                               estadoController.text,
                               cepController.text,
-                              emailController.text,
-                              snapshot.data!.telefone1,
-                              snapshot.data!.telefone2);
+                              produtor,
+                              respTecnico);
                         });
                       },
                       child: Text('Update Data'),

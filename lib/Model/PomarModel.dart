@@ -1,5 +1,14 @@
-class Produtor {
-  Produtor({
+import 'dart:convert';
+
+import 'package:updatetest_nulableversion/Model/ProdutorModel.dart';
+import 'package:updatetest_nulableversion/Model/TecnicoModel.dart';
+
+Pomar pomarFromJson(String str) => Pomar.fromJson(json.decode(str));
+
+String pomarToJson(Pomar data) => json.encode(data.toJson());
+
+class Pomar {
+  Pomar({
     required this.id,
     required this.nome,
     required this.logradouro,
@@ -7,9 +16,8 @@ class Produtor {
     required this.cidade,
     required this.estado,
     required this.cep,
-    required this.email,
-    required this.telefone1,
-    required this.telefone2,
+    required this.produtor,
+    required this.respTecnico,
   });
 
   int id;
@@ -19,11 +27,10 @@ class Produtor {
   String cidade;
   String estado;
   String cep;
-  String email;
-  String telefone1;
-  String telefone2;
+  Produtor produtor;
+  ResponsavelTecnico respTecnico;
 
-  factory Produtor.fromJson(Map<String, dynamic> json) => Produtor(
+  factory Pomar.fromJson(Map<String, dynamic> json) => Pomar(
         id: json["id"],
         nome: json["nome"],
         logradouro: json["logradouro"],
@@ -31,9 +38,8 @@ class Produtor {
         cidade: json["cidade"],
         estado: json["estado"],
         cep: json["cep"],
-        email: json["email"],
-        telefone1: json["telefone1"],
-        telefone2: json["telefone2"],
+        produtor: Produtor.fromJson(json["produtor"]),
+        respTecnico: ResponsavelTecnico.fromJson(json["respTecnico"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -44,8 +50,7 @@ class Produtor {
         "cidade": cidade,
         "estado": estado,
         "cep": cep,
-        "email": email,
-        "telefone1": telefone1,
-        "telefone2": telefone2,
+        "produtor": produtor.toJson(),
+        "respTecnico": respTecnico.toJson(),
       };
 }

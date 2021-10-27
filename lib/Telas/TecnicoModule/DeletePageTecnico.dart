@@ -47,8 +47,7 @@ class _DeletePageTecnicoState extends State<DeletePageTecnico> {
                       child: Text('Delete Data'),
                       onPressed: () {
                         setState(() {
-                          deleteTecnico(
-                              snapshot.data!.idRespTecnico.toString());
+                          deleteTecnico(snapshot.data!.id.toString());
                         });
                       },
                     ),
