@@ -80,10 +80,8 @@ class _UpdatePageState extends State<UpdatePage> {
                     SizedBox(
                       height: 10,
                     ),
-                    CampoDeTextoAddPage(
-                        "Nome", nomeController, 10, snapshot.data!.nome!),
-                    CampoDeTextoAddPage(
-                        "Email", emailController, 10, snapshot.data!.email!),
+                    CampoDeTextoAddPage("Nome", nomeController, 10, true),
+                    CampoDeTextoAddPage("Email", emailController, 10, true),
                     Text(
                       "Endereço:",
                       style: TextStyle(
@@ -94,19 +92,13 @@ class _UpdatePageState extends State<UpdatePage> {
                     SizedBox(
                       height: 10,
                     ),
-                    CampoDeTextoAddPage("Logradouro", logradouroController, 10,
-                        snapshot.data!.logradouro!),
                     CampoDeTextoAddPage(
-                        "Bairro/Localidade",
-                        bairroLocalidadeController,
-                        10,
-                        snapshot.data!.bairroLocalidade!),
-                    CampoDeTextoAddPage(
-                        "Estado", estadoController, 10, snapshot.data!.estado!),
-                    CampoDeTextoAddPage(
-                        "Cidade", cidadeController, 10, snapshot.data!.cidade!),
-                    CampoDeTextoAddPage(
-                        "Cep", cepController, 8, snapshot.data!.cep!),
+                        "Logradouro", logradouroController, 10, true),
+                    CampoDeTextoAddPage("Bairro/Localidade",
+                        bairroLocalidadeController, 10, true),
+                    CampoDeTextoAddPage("Estado", estadoController, 10, true),
+                    CampoDeTextoAddPage("Cidade", cidadeController, 10, true),
+                    CampoDeTextoAddPage("Cep", cepController, 8, true),
                     SizedBox(
                       height: 22,
                     ),

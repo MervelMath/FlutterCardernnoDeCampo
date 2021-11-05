@@ -9,7 +9,7 @@ Future<http.Response> deletePomar(String idPomar) async {
     },
   );
 
-  if (response.statusCode == 200) {
+  if (response.statusCode == 204) {
     // If the server did return a 200 OK response,
     // then parse the JSON. After deleting,
     // you'll get an empty JSON `{}` response.

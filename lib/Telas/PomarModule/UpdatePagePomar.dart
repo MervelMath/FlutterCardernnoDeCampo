@@ -65,8 +65,10 @@ class _UpdatePagePomarState extends State<UpdatePagePomar> {
                 cidadeController.text = snapshot.data!.cidade;
                 estadoController.text = snapshot.data!.estado;
                 cepController.text = snapshot.data!.cep;
-                // produtorController.text = snapshot.data!.produtor!.nome;
-                //  respTecnicoController.text = snapshot.data!.respTecnico!.nome;
+                produtorController.text =
+                    snapshot.data!.produtor.nome.toString();
+                respTecnicoController.text =
+                    snapshot.data!.respTecnico.nome.toString();
                 return ListView(
                   children: <Widget>[
                     Text(snapshot.data!.nome),
@@ -78,55 +80,39 @@ class _UpdatePagePomarState extends State<UpdatePagePomar> {
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
-                          color: Colors.white),
+                          color: Colors.black),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
+                    CampoDeTextoAddPage("Nome", nomeController, 20, true),
                     CampoDeTextoAddPage(
-                        "Nome", nomeController, 10, snapshot.data!.nome),
-                    CampoDeTextoAddPage("Produtor", produtorController, 10,
-                        snapshot.data!.nome.toString()),
-                    CampoDeTextoAddPage(
-                        "Responsável Técnico",
-                        respTecnicoController,
-                        10,
-                        snapshot.data!.nome.toString()),
+                        "Produtor", produtorController, 20, false),
+                    CampoDeTextoAddPage("Responsável Técnico",
+                        respTecnicoController, 20, false),
                     Text(
                       "Endereço:",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
-                          color: Colors.white),
+                          color: Colors.black),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
-                    CampoDeTextoAddPage("Logradouro", logradouroController, 10,
-                        snapshot.data!.logradouro),
                     CampoDeTextoAddPage(
-                        "Bairro/Localidade",
-                        bairroLocalidadeController,
-                        10,
-                        snapshot.data!.bairroLocalidade),
-                    CampoDeTextoAddPage(
-                        "Estado", estadoController, 10, snapshot.data!.estado),
-                    CampoDeTextoAddPage(
-                        "Cidade", cidadeController, 10, snapshot.data!.cidade),
-                    CampoDeTextoAddPage(
-                        "Cep", cepController, 8, snapshot.data!.cep),
+                        "Logradouro", logradouroController, 20, true),
+                    CampoDeTextoAddPage("Bairro/Localidade",
+                        bairroLocalidadeController, 20, true),
+                    CampoDeTextoAddPage("Estado", estadoController, 20, true),
+                    CampoDeTextoAddPage("Cidade", cidadeController, 20, true),
+                    CampoDeTextoAddPage("Cep", cepController, 8, true),
                     SizedBox(
                       height: 22,
                     ),
                     ElevatedButton(
                       onPressed: () {
                         setState(() {
-                          fetchProdutor("25").then((result) {
-                            produtor = result;
-                          });
-                          fetchTecnico("3").then((result) {
-                            respTecnico = result;
-                          });
                           _futurePomar = updatePomar(
                               snapshot.data!.id.toString(),
                               nomeController.text,
@@ -135,8 +121,8 @@ class _UpdatePagePomarState extends State<UpdatePagePomar> {
                               cidadeController.text,
                               estadoController.text,
                               cepController.text,
-                              produtor,
-                              respTecnico);
+                              snapshot.data!.produtor,
+                              snapshot.data!.respTecnico);
                         });
                       },
                       child: Text('Update Data'),

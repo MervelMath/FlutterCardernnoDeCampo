@@ -16,7 +16,7 @@ Future<Pomar> updatePomar(
   Produtor produtor,
   ResponsavelTecnico respTecnico,
 ) async {
-  final response = await http.patch(
+  final response = await http.put(
     Uri.parse('https://caderno-campo.herokuapp.com/pomar/' + id),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
@@ -29,8 +29,8 @@ Future<Pomar> updatePomar(
         "cidade": cidade,
         "estado": estado,
         "cep": cep,
-        "produtor": produtor,
-        "respTecnico": respTecnico,
+        "produtor": produtor.toJson(),
+        "respTecnico": respTecnico.toJson(),
       },
     ),
   );

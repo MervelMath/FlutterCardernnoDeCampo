@@ -50,10 +50,10 @@ class _AddPageTecnicoState extends State<AddPageTecnico> {
             SizedBox(
               height: 10,
             ),
-            CampoDeTextoAddPage("Nome", nomeController, 10, ""),
-            CampoDeTextoAddPage("Email", emailController, 10, ""),
-            CampoDeTextoAddPage("Telefone1", telefone1Controller, 11, ''),
-            CampoDeTextoAddPage("Telefone2", telefone2Controller, 11, ''),
+            CampoDeTextoAddPage("Nome", nomeController, 10, true),
+            CampoDeTextoAddPage("Email", emailController, 10, true),
+            CampoDeTextoAddPage("Telefone1", telefone1Controller, 11, true),
+            CampoDeTextoAddPage("Telefone2", telefone2Controller, 11, true),
             Text(
               "Endereço:",
               style: TextStyle(
@@ -64,13 +64,13 @@ class _AddPageTecnicoState extends State<AddPageTecnico> {
             SizedBox(
               height: 10,
             ),
-            CampoDeTextoAddPage("Logradouro", logradouroController, 10, ''),
+            CampoDeTextoAddPage("Logradouro", logradouroController, 10, true),
             CampoDeTextoAddPage(
-                "Bairro/Localidade", bairroLocalidadeController, 10, ''),
-            CampoDeTextoAddPage("Estado", estadoController, 10, ''),
-            CampoDeTextoAddPage("Cidade", cidadeController, 10, ''),
-            CampoDeTextoAddPage("Cep", cepController, 8, ''),
-            CampoDeTextoAddPage("Crea", creaController, 8, ''),
+                "Bairro/Localidade", bairroLocalidadeController, 10, true),
+            CampoDeTextoAddPage("Estado", estadoController, 10, true),
+            CampoDeTextoAddPage("Cidade", cidadeController, 10, true),
+            CampoDeTextoAddPage("Cep", cepController, 8, true),
+            CampoDeTextoAddPage("Crea", creaController, 8, true),
             SizedBox(
               height: 22,
             ),

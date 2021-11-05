@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CampoDeTextoAddPage extends StatelessWidget {
-  final String valorCampo;
+  final bool valorCampo;
   final String fieldName;
   final int fieldSize;
   final TextEditingController fieldController;
@@ -20,6 +20,7 @@ class CampoDeTextoAddPage extends StatelessWidget {
             borderSide: const BorderSide(color: Colors.black, width: 1.0),
           ),
           labelText: fieldName,
+          enabled: valorCampo,
           labelStyle: TextStyle(
               fontWeight: FontWeight.w600, fontSize: 15, color: Colors.black),
         ),

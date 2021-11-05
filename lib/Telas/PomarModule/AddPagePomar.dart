@@ -71,9 +71,9 @@ class _AddPagePomarState extends State<AddPagePomar> {
             SizedBox(
               height: 10,
             ),
-            CampoDeTextoAddPage("Nome", nomeController, 10, ""),
+            CampoDeTextoAddPage("Nome", nomeController, 10, true),
             CampoDeTextoAddPage(
-                "Resposável Técnico", respTecnicoController, 11, ""),
+                "Resposável Técnico", respTecnicoController, 11, true),
             Text(
               "Endereço:",
               style: TextStyle(
@@ -84,12 +84,12 @@ class _AddPagePomarState extends State<AddPagePomar> {
             SizedBox(
               height: 10,
             ),
-            CampoDeTextoAddPage("Logradouro", logradouroController, 10, ""),
+            CampoDeTextoAddPage("Logradouro", logradouroController, 10, true),
             CampoDeTextoAddPage(
-                "Bairro/Localidade", bairroLocalidadeController, 10, ""),
-            CampoDeTextoAddPage("Estado", estadoController, 10, ""),
-            CampoDeTextoAddPage("Cidade", cidadeController, 10, ""),
-            CampoDeTextoAddPage("Cep", cepController, 8, ""),
+                "Bairro/Localidade", bairroLocalidadeController, 10, true),
+            CampoDeTextoAddPage("Estado", estadoController, 10, true),
+            CampoDeTextoAddPage("Cidade", cidadeController, 10, true),
+            CampoDeTextoAddPage("Cep", cepController, 8, true),
             SizedBox(
               height: 22,
             ),
