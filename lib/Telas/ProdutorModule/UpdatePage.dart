@@ -54,19 +54,19 @@ class _UpdatePageState extends State<UpdatePage> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData) {
-                nomeController.text = snapshot.data!.nome;
-                logradouroController.text = snapshot.data!.logradouro;
+                nomeController.text = snapshot.data!.nome!;
+                logradouroController.text = snapshot.data!.logradouro!;
                 bairroLocalidadeController.text =
-                    snapshot.data!.bairroLocalidade;
-                cidadeController.text = snapshot.data!.cidade;
-                estadoController.text = snapshot.data!.estado;
-                cepController.text = snapshot.data!.cep;
-                emailController.text = snapshot.data!.email;
-                telefone1Controller.text = snapshot.data!.telefone1;
-                telefone2Controller.text = snapshot.data!.telefone2;
+                    snapshot.data!.bairroLocalidade!;
+                cidadeController.text = snapshot.data!.cidade!;
+                estadoController.text = snapshot.data!.estado!;
+                cepController.text = snapshot.data!.cep!;
+                emailController.text = snapshot.data!.email!;
+                telefone1Controller.text = snapshot.data!.telefone1!;
+                telefone2Controller.text = snapshot.data!.telefone2!;
                 return ListView(
                   children: <Widget>[
-                    Text(snapshot.data!.nome),
+                    Text(snapshot.data!.nome!),
                     SizedBox(
                       height: 20,
                     ),
@@ -81,9 +81,9 @@ class _UpdatePageState extends State<UpdatePage> {
                       height: 10,
                     ),
                     CampoDeTextoAddPage(
-                        "Nome", nomeController, 10, snapshot.data!.nome),
+                        "Nome", nomeController, 10, snapshot.data!.nome!),
                     CampoDeTextoAddPage(
-                        "Email", emailController, 10, snapshot.data!.email),
+                        "Email", emailController, 10, snapshot.data!.email!),
                     Text(
                       "Endereço:",
                       style: TextStyle(
@@ -95,18 +95,18 @@ class _UpdatePageState extends State<UpdatePage> {
                       height: 10,
                     ),
                     CampoDeTextoAddPage("Logradouro", logradouroController, 10,
-                        snapshot.data!.logradouro),
+                        snapshot.data!.logradouro!),
                     CampoDeTextoAddPage(
                         "Bairro/Localidade",
                         bairroLocalidadeController,
                         10,
-                        snapshot.data!.bairroLocalidade),
+                        snapshot.data!.bairroLocalidade!),
                     CampoDeTextoAddPage(
-                        "Estado", estadoController, 10, snapshot.data!.estado),
+                        "Estado", estadoController, 10, snapshot.data!.estado!),
                     CampoDeTextoAddPage(
-                        "Cidade", cidadeController, 10, snapshot.data!.cidade),
+                        "Cidade", cidadeController, 10, snapshot.data!.cidade!),
                     CampoDeTextoAddPage(
-                        "Cep", cepController, 8, snapshot.data!.cep),
+                        "Cep", cepController, 8, snapshot.data!.cep!),
                     SizedBox(
                       height: 22,
                     ),
@@ -122,8 +122,8 @@ class _UpdatePageState extends State<UpdatePage> {
                               estadoController.text,
                               cepController.text,
                               emailController.text,
-                              snapshot.data!.telefone1,
-                              snapshot.data!.telefone2);
+                              snapshot.data!.telefone1!,
+                              snapshot.data!.telefone2!);
                         });
                       },
                       child: Text('Update Data'),

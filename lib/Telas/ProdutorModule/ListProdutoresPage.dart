@@ -72,8 +72,7 @@ class _ListProdutoresPageState extends State<ListProdutoresPage> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => ListPomaresPage(
-                                        idUsuario:
-                                            produtores[index].id.toString())),
+                                        idUsuario: produtores[index])),
                               ),
                             ),
                             IconButton(
@@ -105,8 +104,8 @@ class _ListProdutoresPageState extends State<ListProdutoresPage> {
                           ],
                         ),
                         leading: Icon(Icons.account_circle, size: 40),
-                        title: Text(produtores[index].nome),
-                        subtitle: Text(produtores[index].email),
+                        title: Text(produtores[index].nome!),
+                        subtitle: Text(produtores[index].email!),
                       );
                     });
               } else if (snapshot.hasError) {
