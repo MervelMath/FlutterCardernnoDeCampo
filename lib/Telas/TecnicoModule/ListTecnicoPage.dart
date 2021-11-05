@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:updatetest_nulableversion/Controladores/TecnicoModule/GetTecnicoList.dart';
+import 'package:updatetest_nulableversion/Model/ProdutorModel.dart';
 import 'package:updatetest_nulableversion/Model/TecnicoModel.dart';
 import 'package:updatetest_nulableversion/Telas/PomarModule/AddPagePomar.dart';
 import 'package:updatetest_nulableversion/Telas/TecnicoModule/AddPageTecnico.dart';
@@ -8,7 +9,7 @@ import 'package:updatetest_nulableversion/Telas/TecnicoModule/UpdatePageTecnico.
 
 class ListTecnicosPage extends StatefulWidget {
   final bool? ativarBotoes;
-  final String? idProdutor;
+  final Produtor? idProdutor;
   ListTecnicosPage({Key? key, this.ativarBotoes, this.idProdutor})
       : super(key: key);
   @override
@@ -19,8 +20,8 @@ class ListTecnicosPage extends StatefulWidget {
 class _ListTecnicosPageState extends State<ListTecnicosPage> {
   Future<List<ResponsavelTecnico>>? _futureTecnico;
   late bool ativarCampos = false;
-  late String idProdutor = "0";
-  _ListTecnicosPageState(bool? ativarCampos, String? idProdutor) {
+  late Produtor idProdutor = new Produtor();
+  _ListTecnicosPageState(bool? ativarCampos, Produtor? idProdutor) {
     if (ativarCampos != null) this.ativarCampos = ativarCampos;
     if (idProdutor != null) this.idProdutor = idProdutor;
   }
@@ -103,8 +104,8 @@ class _ListTecnicosPageState extends State<ListTecnicosPage> {
                               ),
                             ],
                           ),
-                          title: Text(tecnicos[index].nome),
-                          subtitle: Text(tecnicos[index].email),
+                          title: Text(tecnicos[index].nome!),
+                          subtitle: Text(tecnicos[index].email!),
                         );
                       } else {
                         return ListTile(
@@ -121,14 +122,13 @@ class _ListTecnicosPageState extends State<ListTecnicosPage> {
                                   MaterialPageRoute(
                                       builder: (context) => AddPagePomar(
                                           idProdutor: idProdutor,
-                                          idTecnico:
-                                              tecnicos[index].id.toString())),
+                                          idTecnico: tecnicos[index])),
                                 ),
                               ),
                             ],
                           ),
-                          title: Text(tecnicos[index].nome),
-                          subtitle: Text(tecnicos[index].email),
+                          title: Text(tecnicos[index].nome!),
+                          subtitle: Text(tecnicos[index].email!),
                         );
                       }
                     });

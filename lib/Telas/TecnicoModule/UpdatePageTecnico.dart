@@ -54,20 +54,20 @@ class _UpdatePageState extends State<UpdatePageTecnico> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData) {
-                nomeController.text = snapshot.data!.nome;
-                logradouroController.text = snapshot.data!.logradouro;
+                nomeController.text = snapshot.data!.nome!;
+                logradouroController.text = snapshot.data!.logradouro!;
                 bairroLocalidadeController.text =
-                    snapshot.data!.bairroLocalidade;
-                cidadeController.text = snapshot.data!.cidade;
-                estadoController.text = snapshot.data!.estado;
-                cepController.text = snapshot.data!.cep;
-                emailController.text = snapshot.data!.email;
-                telefone1Controller.text = snapshot.data!.telefone1;
-                telefone2Controller.text = snapshot.data!.telefone2;
-                creaController.text = snapshot.data!.crea;
+                    snapshot.data!.bairroLocalidade!;
+                cidadeController.text = snapshot.data!.cidade!;
+                estadoController.text = snapshot.data!.estado!;
+                cepController.text = snapshot.data!.cep!;
+                emailController.text = snapshot.data!.email!;
+                telefone1Controller.text = snapshot.data!.telefone1!;
+                telefone2Controller.text = snapshot.data!.telefone2!;
+                creaController.text = snapshot.data!.crea!;
                 return ListView(
                   children: <Widget>[
-                    Text(snapshot.data!.nome),
+                    Text(snapshot.data!.nome!),
                     SizedBox(
                       height: 20,
                     ),
@@ -82,13 +82,13 @@ class _UpdatePageState extends State<UpdatePageTecnico> {
                       height: 10,
                     ),
                     CampoDeTextoAddPage(
-                        "Nome", nomeController, 10, snapshot.data!.nome),
+                        "Nome", nomeController, 10, snapshot.data!.nome!),
                     CampoDeTextoAddPage(
-                        "Email", emailController, 10, snapshot.data!.email),
+                        "Email", emailController, 10, snapshot.data!.email!),
                     CampoDeTextoAddPage("Telefone1", telefone1Controller, 11,
-                        snapshot.data!.telefone1),
+                        snapshot.data!.telefone1!),
                     CampoDeTextoAddPage("Telefone2", telefone2Controller, 11,
-                        snapshot.data!.telefone2),
+                        snapshot.data!.telefone2!),
                     Text(
                       "Endereço:",
                       style: TextStyle(
@@ -100,20 +100,20 @@ class _UpdatePageState extends State<UpdatePageTecnico> {
                       height: 10,
                     ),
                     CampoDeTextoAddPage("Logradouro", logradouroController, 10,
-                        snapshot.data!.logradouro),
+                        snapshot.data!.logradouro!),
                     CampoDeTextoAddPage(
                         "Bairro/Localidade",
                         bairroLocalidadeController,
                         10,
-                        snapshot.data!.bairroLocalidade),
+                        snapshot.data!.bairroLocalidade!),
                     CampoDeTextoAddPage(
-                        "Estado", estadoController, 10, snapshot.data!.estado),
+                        "Estado", estadoController, 10, snapshot.data!.estado!),
                     CampoDeTextoAddPage(
-                        "Cidade", cidadeController, 10, snapshot.data!.cidade),
+                        "Cidade", cidadeController, 10, snapshot.data!.cidade!),
                     CampoDeTextoAddPage(
-                        "Cep", cepController, 8, snapshot.data!.cep),
+                        "Cep", cepController, 8, snapshot.data!.cep!),
                     CampoDeTextoAddPage(
-                        "Crea", creaController, 8, snapshot.data!.crea),
+                        "Crea", creaController, 8, snapshot.data!.crea!),
                     SizedBox(
                       height: 22,
                     ),

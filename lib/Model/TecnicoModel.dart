@@ -1,28 +1,28 @@
 class ResponsavelTecnico {
-  final int id;
-  final String nome;
-  final String logradouro;
-  final String bairroLocalidade;
-  final String cidade;
-  final String estado;
-  final String cep;
-  final String email;
-  final String telefone1;
-  final String telefone2;
-  final String crea;
+  final int? id;
+  final String? nome;
+  final String? logradouro;
+  final String? bairroLocalidade;
+  final String? cidade;
+  final String? estado;
+  final String? cep;
+  final String? email;
+  final String? telefone1;
+  final String? telefone2;
+  final String? crea;
 
   ResponsavelTecnico({
-    required this.id,
-    required this.nome,
-    required this.logradouro,
-    required this.bairroLocalidade,
-    required this.cidade,
-    required this.estado,
-    required this.cep,
-    required this.email,
-    required this.telefone1,
-    required this.telefone2,
-    required this.crea,
+    this.id,
+    this.nome,
+    this.logradouro,
+    this.bairroLocalidade,
+    this.cidade,
+    this.estado,
+    this.cep,
+    this.email,
+    this.telefone1,
+    this.telefone2,
+    this.crea,
   });
 
   factory ResponsavelTecnico.fromJson(Map<String, dynamic> json) {
