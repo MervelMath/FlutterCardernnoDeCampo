@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:updatetest_nulableversion/Controladores/PomarModule/GetPomarList.dart';
 import 'package:updatetest_nulableversion/Model/PomarModel.dart';
+import 'package:updatetest_nulableversion/Model/ProdutorModel.dart';
 import 'package:updatetest_nulableversion/Telas/TecnicoModule/ListTecnicoPage.dart';
 
 import 'AddPagePomar.dart';
@@ -8,7 +9,7 @@ import 'DeletePagePomar.dart';
 import 'UpdatePagePomar.dart';
 
 class ListPomaresPage extends StatefulWidget {
-  final String? idUsuario;
+  final Produtor? idUsuario;
 
   ListPomaresPage({Key? key, this.idUsuario}) : super(key: key);
   @override
@@ -18,9 +19,11 @@ class ListPomaresPage extends StatefulWidget {
 class _ListPomaresPageState extends State<ListPomaresPage> {
   Future<List<Pomar>>? _futurePomar;
 
+  late Produtor produdor = new Produtor();
   late String id = "0";
-  _ListPomaresPageState(String? idUsuario) {
-    if (idUsuario != "null") id = idUsuario!;
+  _ListPomaresPageState(Produtor? idUsuario) {
+    if (idUsuario != null) produdor = idUsuario;
+    this.id = idUsuario!.id.toString();
   }
 
   @override
@@ -49,7 +52,7 @@ class _ListPomaresPageState extends State<ListPomaresPage> {
                 MaterialPageRoute(
                   builder: (context) => ListTecnicosPage(
                     ativarBotoes: false,
-                    idProdutor: id,
+                    idProdutor: produdor,
                   ),
                 ),
               ),

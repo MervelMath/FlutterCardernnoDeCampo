@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:updatetest_nulableversion/Controladores/PomarModule/AddPomar.dart';
 import 'package:updatetest_nulableversion/Controladores/ProdutorModule/GetProdutor.dart';
-import 'package:updatetest_nulableversion/Controladores/ProdutorModule/GetProdutorList.dart';
 import 'package:updatetest_nulableversion/Controladores/TecnicoModule/GetTecnico.dart';
 import 'package:updatetest_nulableversion/Model/PomarModel.dart';
 import 'package:updatetest_nulableversion/Model/ProdutorModel.dart';
@@ -9,8 +8,8 @@ import 'package:updatetest_nulableversion/Model/TecnicoModel.dart';
 import '../../WidgetsPersonalizados/TextFieldPersonalizado.dart';
 
 class AddPagePomar extends StatefulWidget {
-  final String? idProdutor;
-  final String? idTecnico;
+  final Produtor? idProdutor;
+  final ResponsavelTecnico? idTecnico;
   AddPagePomar({Key? key, this.idProdutor, this.idTecnico}) : super(key: key);
   @override
   _AddPagePomarState createState() =>
@@ -18,9 +17,9 @@ class AddPagePomar extends StatefulWidget {
 }
 
 class _AddPagePomarState extends State<AddPagePomar> {
-  String idProdutor = "0";
-  String idTecnico = "0";
-  _AddPagePomarState(String idProdutor, String idTecnico) {
+  Produtor idProdutor = new Produtor();
+  ResponsavelTecnico idTecnico = new ResponsavelTecnico();
+  _AddPagePomarState(Produtor idProdutor, ResponsavelTecnico idTecnico) {
     this.idProdutor = idProdutor;
     this.idTecnico = idTecnico;
   }
@@ -34,10 +33,8 @@ class _AddPagePomarState extends State<AddPagePomar> {
   final TextEditingController produtorController = TextEditingController();
   final TextEditingController respTecnicoController = TextEditingController();
   late DropdownButton<Produtor> a;
-  late Produtor produtor;
-  late String progutorPorId;
-  late ResponsavelTecnico respTecnico;
-
+  late Produtor? produtor;
+  late ResponsavelTecnico? respTecnico;
   Future<Pomar>? _futurePomar;
 
   @override
@@ -103,12 +100,6 @@ class _AddPagePomarState extends State<AddPagePomar> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           setState(() {
-            fetchProdutor(idProdutor).then((result) {
-              produtor = result;
-            });
-            fetchTecnico(idTecnico).then((result) {
-              respTecnico = result;
-            });
             _futurePomar = criarPomar(
                 nomeController.text,
                 logradouroController.text,
@@ -116,8 +107,8 @@ class _AddPagePomarState extends State<AddPagePomar> {
                 cidadeController.text,
                 estadoController.text,
                 cepController.text,
-                produtor,
-                respTecnico);
+                idProdutor,
+                this.idTecnico);
           });
         },
         child: Icon(Icons.arrow_forward_ios_sharp),
