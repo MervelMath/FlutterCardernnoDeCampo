@@ -1,27 +1,27 @@
 class Produtor {
   Produtor({
-    required this.id,
-    required this.nome,
-    required this.logradouro,
-    required this.bairroLocalidade,
-    required this.cidade,
-    required this.estado,
-    required this.cep,
-    required this.email,
-    required this.telefone1,
-    required this.telefone2,
+    this.id,
+    this.nome,
+    this.logradouro,
+    this.bairroLocalidade,
+    this.cidade,
+    this.estado,
+    this.cep,
+    this.email,
+    this.telefone1,
+    this.telefone2,
   });
 
-  int id;
-  String nome;
-  String logradouro;
-  String bairroLocalidade;
-  String cidade;
-  String estado;
-  String cep;
-  String email;
-  String telefone1;
-  String telefone2;
+  int? id;
+  String? nome;
+  String? logradouro;
+  String? bairroLocalidade;
+  String? cidade;
+  String? estado;
+  String? cep;
+  String? email;
+  String? telefone1;
+  String? telefone2;
 
   factory Produtor.fromJson(Map<String, dynamic> json) => Produtor(
         id: json["id"],
