@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:updatetest_nulableversion/Telas/PomarModule/ListPomaresPage.dart';
-import 'package:updatetest_nulableversion/Telas/ProdutorModule/AddPageProdutor.dart';
-import 'package:updatetest_nulableversion/Telas/ProdutorModule/DeleteProdutorPage.dart';
-import 'package:updatetest_nulableversion/Telas/ProdutorModule/UpdatePage.dart';
-import 'package:updatetest_nulableversion/Telas/TecnicoModule/DeletePageTecnico.dart';
+import 'package:updatetest_nulableversion/Telas/PortaEnxertoModule/ListPagePortaEnxerto.dart';
 import 'package:updatetest_nulableversion/Telas/TecnicoModule/ListTecnicoPage.dart';
-import 'package:updatetest_nulableversion/Telas/TecnicoModule/UpdatePageTecnico.dart';
 import 'Telas/ProdutorModule/ListProdutoresPage.dart';
-import 'Telas/TecnicoModule/AddPageTecnico.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,12 +24,7 @@ class MyApp extends StatelessWidget {
             ListProdutoresPage(), //ProdutorMainPage(),
         "/TecnicoPage": (context) => ListTecnicosPage(), //TecnicoMainPage(),
         "/PomarPage": (context) => ListPomaresPage(),
-        "/AddPage": (context) => AddPage(),
-        "/UpdatePage": (context) => UpdatePage(),
-        "/DeletePage": (context) => DeletePage(),
-        "/AddPageTecnico": (context) => AddPageTecnico(),
-        "/DeletePageTecnico": (context) => DeletePageTecnico(),
-        "/UpdatePageTecnico": (context) => UpdatePageTecnico(),
+        "/PortaEnxertoPage": (context) => ListPagePortaEnxerto()
       },
     );
   }
@@ -106,6 +96,22 @@ class HomePage extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).pushNamed("/TecnicoPage");
               },
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            ListTile(
+              trailing: Icon(Icons.keyboard_arrow_right_outlined, size: 38),
+              title: Text(
+                'Porta Enxertos',
+                style: TextStyle(fontSize: 20),
+              ),
+              onTap: () {
+                Navigator.of(context).pushNamed("/PortaEnxertoPage");
+              },
+            ),
+            SizedBox(
+              height: 10,
             ),
           ],
         ),
