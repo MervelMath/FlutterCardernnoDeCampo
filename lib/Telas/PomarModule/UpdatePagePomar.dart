@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:updatetest_nulableversion/Controladores/PomarModule/GetPomar.dart';
 import 'package:updatetest_nulableversion/Controladores/PomarModule/UpdatePomar.dart';
-import 'package:updatetest_nulableversion/Controladores/ProdutorModule/GetProdutor.dart';
-import 'package:updatetest_nulableversion/Controladores/TecnicoModule/GetTecnico.dart';
 import 'package:updatetest_nulableversion/Model/PomarModel.dart';
 import 'package:updatetest_nulableversion/Model/ProdutorModel.dart';
 import 'package:updatetest_nulableversion/Model/TecnicoModel.dart';
