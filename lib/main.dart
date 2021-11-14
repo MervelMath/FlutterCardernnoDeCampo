@@ -47,6 +47,10 @@ class HomePage extends StatelessWidget {
       body: Container(
         padding: const EdgeInsets.all(8.0),
         alignment: Alignment.center,
+        child: Container(
+            width: 300,
+            height: 300,
+            child: Image.asset('Imagens/Maca_Menu.jpeg')),
       ),
       appBar: AppBar(
         title: Text(
