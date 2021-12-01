@@ -1,37 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:updatetest_nulableversion/Controladores/PortaEnxertoModule/GetPortaEnxerto.dart';
-import 'package:updatetest_nulableversion/Controladores/PortaEnxertoModule/UpdatePortaEnxerto.dart';
-import 'package:updatetest_nulableversion/Controladores/ProdutorModule/GetProdutor.dart';
-import 'package:updatetest_nulableversion/Controladores/ProdutorModule/UpdateProdutor.dart';
-import 'package:updatetest_nulableversion/Model/PortaEnxertoModel.dart';
-import 'package:updatetest_nulableversion/Model/ProdutorModel.dart';
-
+import 'package:updatetest_nulableversion/Controladores/CultivarModule/GetCultivar.dart';
+import 'package:updatetest_nulableversion/Controladores/CultivarModule/UpdateCultivar.dart';
+import 'package:updatetest_nulableversion/Model/CultivarModel.dart';
 import '../../WidgetsPersonalizados/TextFieldPersonalizado.dart';
 
-class UpdatePagePortaEnxerto extends StatefulWidget {
+class UpdatePageCultivar extends StatefulWidget {
   final String?
       idUsuario; //preciso rever a necessidade desse parâmetro ser opcional.
 
-  UpdatePagePortaEnxerto({Key? key, this.idUsuario}) : super(key: key);
+  UpdatePageCultivar({Key? key, this.idUsuario}) : super(key: key);
 
   @override
-  _UpdatePagePortaEnxertoState createState() =>
-      _UpdatePagePortaEnxertoState(idUsuario!);
+  _UpdatePageCultivarState createState() =>
+      _UpdatePageCultivarState(idUsuario!);
 }
 
-class _UpdatePagePortaEnxertoState extends State<UpdatePagePortaEnxerto> {
+class _UpdatePageCultivarState extends State<UpdatePageCultivar> {
   final TextEditingController nomeController = TextEditingController();
-  late Future<PortaEnxerto> _futurePortaEnxerto;
+  late Future<Cultivar> _futureCultivar;
 
   late String id = "0";
-  _UpdatePagePortaEnxertoState(String idUsuario) {
+  _UpdatePageCultivarState(String idUsuario) {
     id = idUsuario;
   }
 
   @override
   void initState() {
     super.initState();
-    _futurePortaEnxerto = fetchPortaEnxerto(id);
+    _futureCultivar = fetchCultivar(id);
   }
 
   @override
@@ -43,8 +39,8 @@ class _UpdatePagePortaEnxertoState extends State<UpdatePagePortaEnxerto> {
       body: Container(
         alignment: Alignment.center,
         padding: const EdgeInsets.all(8.0),
-        child: FutureBuilder<PortaEnxerto>(
-          future: _futurePortaEnxerto,
+        child: FutureBuilder<Cultivar>(
+          future: _futureCultivar,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData) {
@@ -72,12 +68,12 @@ class _UpdatePagePortaEnxertoState extends State<UpdatePagePortaEnxerto> {
                     ElevatedButton(
                       onPressed: () {
                         setState(() {
-                          _futurePortaEnxerto = updatePortaEnxerto(
+                          _futureCultivar = updateCultivar(
                               snapshot.data!.id.toString(),
                               nomeController.text);
                         });
                       },
-                      child: Text('Atualizar Porta Enxerto'),
+                      child: Text('Atualizar Cultivar'),
                     ),
                   ],
                 );

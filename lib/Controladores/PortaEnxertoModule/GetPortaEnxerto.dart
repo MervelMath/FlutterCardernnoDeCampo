@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:async';
 import 'package:http/http.dart' as http;
-import 'package:updatetest_nulableversion/Model/PortaEnxerto.dart';
+import 'package:updatetest_nulableversion/Model/PortaEnxertoModel.dart';
 import 'package:updatetest_nulableversion/Model/ProdutorModel.dart';
 
 Future<PortaEnxerto> fetchPortaEnxerto(String id) async {

@@ -9,26 +9,26 @@ String pomarToJson(Pomar data) => json.encode(data.toJson());
 
 class Pomar {
   Pomar({
-    required this.id,
-    required this.nome,
-    required this.logradouro,
-    required this.bairroLocalidade,
-    required this.cidade,
-    required this.estado,
-    required this.cep,
-    required this.produtor,
-    required this.respTecnico,
+    this.id,
+    this.nome,
+    this.logradouro,
+    this.bairroLocalidade,
+    this.cidade,
+    this.estado,
+    this.cep,
+    this.produtor,
+    this.respTecnico,
   });
 
-  int id;
-  String nome;
-  String logradouro;
-  String bairroLocalidade;
-  String cidade;
-  String estado;
-  String cep;
-  Produtor produtor;
-  ResponsavelTecnico respTecnico;
+  int? id;
+  String? nome;
+  String? logradouro;
+  String? bairroLocalidade;
+  String? cidade;
+  String? estado;
+  String? cep;
+  Produtor? produtor;
+  ResponsavelTecnico? respTecnico;
 
   factory Pomar.fromJson(Map<String, dynamic> json) => Pomar(
         id: json["id"],
@@ -50,7 +50,14 @@ class Pomar {
         "cidade": cidade,
         "estado": estado,
         "cep": cep,
-        "produtor": produtor.toJson(),
-        "respTecnico": respTecnico.toJson(),
+        "produtor": produtor?.toJson(),
+        "respTecnico": respTecnico?.toJson(),
       };
+
+  String toString() {
+    return nome!;
+  }
+
+  @override
+  bool equals(Pomar? e1, Pomar? e2) => e1 == e2;
 }

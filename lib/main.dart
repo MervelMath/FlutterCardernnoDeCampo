@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:updatetest_nulableversion/Telas/CultivarModule/ListPageCultivar.dart';
 import 'package:updatetest_nulableversion/Telas/PomarModule/ListPomaresPage.dart';
 import 'package:updatetest_nulableversion/Telas/PortaEnxertoModule/ListPagePortaEnxerto.dart';
 import 'package:updatetest_nulableversion/Telas/TecnicoModule/ListTecnicoPage.dart';
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
             ListProdutoresPage(), //ProdutorMainPage(),
         "/TecnicoPage": (context) => ListTecnicosPage(), //TecnicoMainPage(),
         "/PomarPage": (context) => ListPomaresPage(),
-        "/PortaEnxertoPage": (context) => ListPagePortaEnxerto()
+        "/PortaEnxertoPage": (context) => ListPagePortaEnxerto(),
+        "/CultivarPage": (context) => ListPageCultivar(),
       },
     );
   }
@@ -77,19 +79,6 @@ class HomePage extends StatelessWidget {
             ListTile(
               trailing: Icon(Icons.keyboard_arrow_right_outlined, size: 38),
               title: Text(
-                'Pomares',
-                style: TextStyle(fontSize: 20),
-              ),
-              onTap: () {
-                Navigator.of(context).pushNamed("/PomarPage");
-              },
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            ListTile(
-              trailing: Icon(Icons.keyboard_arrow_right_outlined, size: 38),
-              title: Text(
                 'Responsáveis Técnicos',
                 style: TextStyle(fontSize: 20),
               ),
@@ -108,6 +97,19 @@ class HomePage extends StatelessWidget {
               ),
               onTap: () {
                 Navigator.of(context).pushNamed("/PortaEnxertoPage");
+              },
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            ListTile(
+              trailing: Icon(Icons.keyboard_arrow_right_outlined, size: 38),
+              title: Text(
+                'Cultivares',
+                style: TextStyle(fontSize: 20),
+              ),
+              onTap: () {
+                Navigator.of(context).pushNamed("/CultivarPage");
               },
             ),
             SizedBox(

@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:updatetest_nulableversion/Model/PortaEnxertoModel.dart';
+import 'package:updatetest_nulableversion/Model/CultivarQuadraModel.dart';
 import 'dart:async';
 
-Future<PortaEnxerto> updatePortaEnxerto(String id, String nome) async {
+Future<CultivarQuadra> updateCultivarQuadra(String id, String nome) async {
   final response = await http.put(
-    Uri.parse('https://caderno-campo.herokuapp.com/portaEnxerto/' + id),
+    Uri.parse('https://caderno-campo.herokuapp.com/cultivarQuadra/' + id),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -17,7 +17,7 @@ Future<PortaEnxerto> updatePortaEnxerto(String id, String nome) async {
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    return PortaEnxerto.fromJson(jsonDecode(response.body));
+    return CultivarQuadra.fromJson(jsonDecode(response.body));
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.

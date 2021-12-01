@@ -4,7 +4,6 @@
 
 import 'dart:convert';
 
-import 'CultivarQuadra.dart';
 import 'PomarModel.dart';
 
 Quadra quadraFromJson(String str) => Quadra.fromJson(json.decode(str));
@@ -19,7 +18,6 @@ class Quadra {
     required this.distanciaPlantas,
     required this.quantidadeColmeias,
     required this.pomar,
-    required this.cultivaresQuadra,
   });
 
   int id;
@@ -28,7 +26,15 @@ class Quadra {
   int distanciaPlantas;
   int quantidadeColmeias;
   Pomar pomar;
-  List<CultivarQuadra> cultivaresQuadra;
+
+  factory Quadra.fromJsonId(Map<String, dynamic> json) => Quadra(
+        id: json["id"],
+        anoPlantio: json["anoPlantio"],
+        distanciaFilas: json["distanciaFilas"],
+        distanciaPlantas: json["distanciaPlantas"],
+        quantidadeColmeias: json["quantidadeColmeias"],
+        pomar: Pomar.fromJson(json["id_pomar"]),
+      );
 
   factory Quadra.fromJson(Map<String, dynamic> json) => Quadra(
         id: json["id"],
@@ -37,8 +43,6 @@ class Quadra {
         distanciaPlantas: json["distanciaPlantas"],
         quantidadeColmeias: json["quantidadeColmeias"],
         pomar: Pomar.fromJson(json["pomar"]),
-        cultivaresQuadra: List<CultivarQuadra>.from(
-            json["cultivaresQuadra"].map((x) => CultivarQuadra.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -48,7 +52,5 @@ class Quadra {
         "distanciaPlantas": distanciaPlantas,
         "quantidadeColmeias": quantidadeColmeias,
         "pomar": pomar.toJson(),
-        "cultivaresQuadra":
-            List<dynamic>.from(cultivaresQuadra.map((x) => x.toJson())),
       };
 }

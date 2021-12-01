@@ -1,26 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:updatetest_nulableversion/Controladores/PortaEnxertoModule/AddPortaEnxerto.dart';
-import 'package:updatetest_nulableversion/Controladores/ProdutorModule/AddProdutor.dart';
-import 'package:updatetest_nulableversion/Model/PortaEnxertoModel.dart';
-import 'package:updatetest_nulableversion/Model/ProdutorModel.dart';
-
+import 'package:updatetest_nulableversion/Controladores/CultivarQuadraModel/AddCultivarQuadra.dart';
+import 'package:updatetest_nulableversion/Model/CultivarQuadraModel.dart';
 import '../../WidgetsPersonalizados/TextFieldPersonalizado.dart';
 
-class AddPagePortaEnxerto extends StatefulWidget {
+class AddPageCultivarQuadra extends StatefulWidget {
   @override
-  _AddPagePortaEnxertoState createState() => _AddPagePortaEnxertoState();
+  _AddPageCultivarQuadraState createState() => _AddPageCultivarQuadraState();
 }
 
-class _AddPagePortaEnxertoState extends State<AddPagePortaEnxerto> {
+class _AddPageCultivarQuadraState extends State<AddPageCultivarQuadra> {
   final TextEditingController nomeController = TextEditingController();
-  Future<PortaEnxerto>? _futureProdutor;
+  Future<CultivarQuadra>? _futureCultivarQuadra;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: Text(
-          "Cadastro de Porta Enxerto",
+          "Cadastro de Cultivar Quadra",
           style: TextStyle(
               fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
         ),
@@ -47,14 +44,14 @@ class _AddPagePortaEnxertoState extends State<AddPagePortaEnxerto> {
             SizedBox(
               height: 22,
             ),
-            _futureProdutor == null ? Container() : Text("Funcionou!!"),
+            _futureCultivarQuadra == null ? Container() : Text("Funcionou!!"),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           setState(() {
-            _futureProdutor = criarPortaEnxerto(nomeController.text);
+            _futureCultivarQuadra = criarCultivarQuadra(nomeController.text);
           });
         },
         child: Icon(Icons.arrow_forward_ios_sharp),

@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:updatetest_nulableversion/Controladores/PortaEnxertoModule/GetPortaEnxertoList.dart';
-import 'package:updatetest_nulableversion/Model/PortaEnxertoModel.dart';
-import 'package:updatetest_nulableversion/Telas/PortaEnxertoModule/AddPagePortaEnxerto.dart';
-import 'package:updatetest_nulableversion/Telas/PortaEnxertoModule/UpdatePagePortaEnxerto.dart';
+import 'package:updatetest_nulableversion/Controladores/CultivarModule/GetCultivarList.dart';
+import 'package:updatetest_nulableversion/Model/CultivarModel.dart';
+import 'package:updatetest_nulableversion/Telas/CultivarModule/AddPageCultivar.dart';
 
-import 'DeletePagePortaEnxerto.dart';
+import 'DeletePageCultivar.dart';
+import 'UpdatePageCultivar.dart';
 
-class ListPagePortaEnxerto extends StatefulWidget {
+class ListPageCultivar extends StatefulWidget {
   @override
-  _ListPagePortaEnxertoState createState() => _ListPagePortaEnxertoState();
+  _ListPageCultivarState createState() => _ListPageCultivarState();
 }
 
-class _ListPagePortaEnxertoState extends State<ListPagePortaEnxerto> {
-  Future<List<PortaEnxerto>>? _futurePortaEnxerto;
+class _ListPageCultivarState extends State<ListPageCultivar> {
+  Future<List<Cultivar>>? _futureCultivar;
 
   @override
   void initState() {
     super.initState();
-    _futurePortaEnxerto = fetchPortaEnxertoList();
+    _futureCultivar = fetchCultivarList();
   }
 
   @override
@@ -35,7 +35,7 @@ class _ListPagePortaEnxertoState extends State<ListPagePortaEnxerto> {
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AddPagePortaEnxerto(),
+                  builder: (context) => AddPageCultivar(),
                 ),
               ),
               icon: Icon(
@@ -51,11 +51,11 @@ class _ListPagePortaEnxertoState extends State<ListPagePortaEnxerto> {
           title: const Text('Lista de Porta Enxertos'),
         ),
         body: Center(
-          child: FutureBuilder<List<PortaEnxerto>>(
-            future: _futurePortaEnxerto,
+          child: FutureBuilder<List<Cultivar>>(
+            future: _futureCultivar,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                List<PortaEnxerto>? produtores = snapshot.data;
+                List<Cultivar>? produtores = snapshot.data;
                 return ListView.builder(
                     itemCount: produtores!.length,
                     itemBuilder: (BuildContext context, int index) {
@@ -71,11 +71,9 @@ class _ListPagePortaEnxertoState extends State<ListPagePortaEnxerto> {
                                 onPressed: () => Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          DeletePagePortaEnxerto(
-                                              idUsuario: produtores[index]
-                                                  .id
-                                                  .toString())),
+                                      builder: (context) => DeletePageCultivar(
+                                          idUsuario:
+                                              produtores[index].id.toString())),
                                 ),
                               ),
                               IconButton(
@@ -86,11 +84,9 @@ class _ListPagePortaEnxertoState extends State<ListPagePortaEnxerto> {
                                 onPressed: () => Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          UpdatePagePortaEnxerto(
-                                              idUsuario: produtores[index]
-                                                  .id
-                                                  .toString())),
+                                      builder: (context) => UpdatePageCultivar(
+                                          idUsuario:
+                                              produtores[index].id.toString())),
                                 ),
                               ),
                             ],

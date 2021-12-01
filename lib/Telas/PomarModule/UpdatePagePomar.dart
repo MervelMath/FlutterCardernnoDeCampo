@@ -56,20 +56,20 @@ class _UpdatePagePomarState extends State<UpdatePagePomar> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData) {
-                nomeController.text = snapshot.data!.nome;
-                logradouroController.text = snapshot.data!.logradouro;
+                nomeController.text = snapshot.data!.nome!;
+                logradouroController.text = snapshot.data!.logradouro!;
                 bairroLocalidadeController.text =
-                    snapshot.data!.bairroLocalidade;
-                cidadeController.text = snapshot.data!.cidade;
-                estadoController.text = snapshot.data!.estado;
-                cepController.text = snapshot.data!.cep;
+                    snapshot.data!.bairroLocalidade!;
+                cidadeController.text = snapshot.data!.cidade!;
+                estadoController.text = snapshot.data!.estado!;
+                cepController.text = snapshot.data!.cep!;
                 produtorController.text =
-                    snapshot.data!.produtor.nome.toString();
+                    snapshot.data!.produtor!.nome.toString();
                 respTecnicoController.text =
-                    snapshot.data!.respTecnico.nome.toString();
+                    snapshot.data!.respTecnico!.nome.toString();
                 return ListView(
                   children: <Widget>[
-                    Text(snapshot.data!.nome),
+                    Text(snapshot.data!.nome!),
                     SizedBox(
                       height: 20,
                     ),
@@ -119,8 +119,8 @@ class _UpdatePagePomarState extends State<UpdatePagePomar> {
                               cidadeController.text,
                               estadoController.text,
                               cepController.text,
-                              snapshot.data!.produtor,
-                              snapshot.data!.respTecnico);
+                              snapshot.data!.produtor!,
+                              snapshot.data!.respTecnico!);
                         });
                       },
                       child: Text('Update Data'),

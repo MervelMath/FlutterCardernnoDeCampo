@@ -1,42 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:updatetest_nulableversion/Controladores/PortaEnxertoModule/DeletePortaEnxerto.dart';
-import 'package:updatetest_nulableversion/Controladores/PortaEnxertoModule/GetPortaEnxerto.dart';
-import 'package:updatetest_nulableversion/Controladores/ProdutorModule/DeleteProdutor.dart';
-import 'package:updatetest_nulableversion/Controladores/ProdutorModule/GetProdutor.dart';
-import 'package:updatetest_nulableversion/Model/PortaEnxertoModel.dart';
-import 'package:updatetest_nulableversion/Model/ProdutorModel.dart';
+import 'package:updatetest_nulableversion/Controladores/CultivarModule/DeleteCultivar.dart';
+import 'package:updatetest_nulableversion/Controladores/CultivarModule/GetCultivar.dart';
+import 'package:updatetest_nulableversion/Model/CultivarModel.dart';
 
-class DeletePagePortaEnxerto extends StatefulWidget {
+class DeletePageCultivar extends StatefulWidget {
   final String? idUsuario;
 
-  DeletePagePortaEnxerto({Key? key, this.idUsuario}) : super(key: key);
+  DeletePageCultivar({Key? key, this.idUsuario}) : super(key: key);
   @override
-  _DeletePagePortaEnxertoState createState() =>
-      _DeletePagePortaEnxertoState(idUsuario!);
+  _DeletePageCultivarState createState() =>
+      _DeletePageCultivarState(idUsuario!);
 }
 
-class _DeletePagePortaEnxertoState extends State<DeletePagePortaEnxerto> {
-  late Future<PortaEnxerto> _futurePortaEnxerto;
+class _DeletePageCultivarState extends State<DeletePageCultivar> {
+  late Future<Cultivar> _futureCultivar;
   late String id = "0";
-  _DeletePagePortaEnxertoState(String idUsuario) {
+  _DeletePageCultivarState(String idUsuario) {
     id = idUsuario;
   }
 
   @override
   void initState() {
     super.initState();
-    _futurePortaEnxerto = fetchPortaEnxerto(id);
+    _futureCultivar = fetchCultivar(id);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Excluisão de Porta Enxerto'),
+        title: Text('Exclusão de Porta Enxerto'),
       ),
       body: Center(
-        child: FutureBuilder<PortaEnxerto>(
-          future: _futurePortaEnxerto,
+        child: FutureBuilder<Cultivar>(
+          future: _futureCultivar,
           builder: (context, snapshot) {
             // If the connection is done,
             // check for response data or an error.
@@ -50,7 +47,7 @@ class _DeletePagePortaEnxertoState extends State<DeletePagePortaEnxerto> {
                       child: Text('Delete Data'),
                       onPressed: () {
                         setState(() {
-                          deletePortaEnxerto(snapshot.data!.id.toString());
+                          deleteCultivar(snapshot.data!.id.toString());
                         });
                       },
                     ),

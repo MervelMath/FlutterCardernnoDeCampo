@@ -21,12 +21,12 @@ Future<Pomar> criarPomar(
       'Content-Type': 'application/json; charset=UTF-8',
     },
     body: jsonEncode(<String, dynamic>{
-      "nome": "pomar-05",
-      "logradouro": "pomar-05",
-      "bairro_localidade": "pomar-05",
-      "cidade": "pomar-05",
-      "estado": "pomar-05",
-      "cep": "22222222",
+      "nome": nome,
+      "logradouro": logradouro,
+      "bairro_localidade": bairroLocalidade,
+      "cidade": cidade,
+      "estado": estado,
+      "cep": cep,
       "produtor": produtor.toJson(),
       "respTecnico": respTecnico.toJson()
     }),
