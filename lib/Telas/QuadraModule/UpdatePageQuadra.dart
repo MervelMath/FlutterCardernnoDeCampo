@@ -64,10 +64,10 @@ class _UpdatePageQuadraState extends State<UpdatePageQuadra> {
                     snapshot.data!.quantidadeColmeias.toString();
                 distanciaPlantasController.text =
                     snapshot.data!.distanciaPlantas.toString();
-                pomarController.text = snapshot.data!.pomar.nome!;
+                pomarController.text = snapshot.data!.pomar!.nome!;
                 return ListView(
                   children: <Widget>[
-                    Text(snapshot.data!.pomar.nome!),
+                    Text(snapshot.data!.pomar!.nome!),
                     SizedBox(
                       height: 20,
                     ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:updatetest_nulableversion/Telas/CultivarModule/ListPageCultivar.dart';
 import 'package:updatetest_nulableversion/Telas/PomarModule/ListPomaresPage.dart';
 import 'package:updatetest_nulableversion/Telas/PortaEnxertoModule/ListPagePortaEnxerto.dart';
+import 'package:updatetest_nulableversion/Telas/PragaModule/ListPragaPage.dart';
 import 'package:updatetest_nulableversion/Telas/TecnicoModule/ListTecnicoPage.dart';
 import 'Telas/ProdutorModule/ListProdutoresPage.dart';
 
@@ -23,10 +24,13 @@ class MyApp extends StatelessWidget {
         "/": (context) => HomePage(),
         "/ProdutorPage": (context) =>
             ListProdutoresPage(), //ProdutorMainPage(),
-        "/TecnicoPage": (context) => ListTecnicosPage(), //TecnicoMainPage(),
+        "/TecnicoPage": (context) =>
+            ListTecnicosPage(ativarBotoes: true), //TecnicoMainPage(),
         "/PomarPage": (context) => ListPomaresPage(),
-        "/PortaEnxertoPage": (context) => ListPagePortaEnxerto(),
-        "/CultivarPage": (context) => ListPageCultivar(),
+        "/PortaEnxertoPage": (context) =>
+            ListPortaEnxertoPage(ativarBotoes: true),
+        "/CultivarPage": (context) => ListCultivarPage(ativarBotoes: true),
+        "/PragaPage": (context) => ListPragasPage(ativarBotoes: true),
       },
     );
   }
@@ -114,6 +118,16 @@ class HomePage extends StatelessWidget {
             ),
             SizedBox(
               height: 10,
+            ),
+            ListTile(
+              trailing: Icon(Icons.keyboard_arrow_right_outlined, size: 38),
+              title: Text(
+                'Pragas',
+                style: TextStyle(fontSize: 20),
+              ),
+              onTap: () {
+                Navigator.of(context).pushNamed("/PragaPage");
+              },
             ),
           ],
         ),

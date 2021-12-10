@@ -3,10 +3,15 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'package:updatetest_nulableversion/Model/CultivarQuadraModel.dart';
 
-Future<List<CultivarQuadra>> fetchCultivarQuadraList() async {
-  final response = await http.get(
-    Uri.parse('https://caderno-campo.herokuapp.com/cultivarQuadra'),
-  );
+Future<List<CultivarQuadra>> fetchCultivarQuadraList(String id) async {
+  final response = (id != "0")
+      ? await http.get(
+          Uri.parse(
+              'https://caderno-campo.herokuapp.com/cultivarQuadra?quadra=' +
+                  id),
+        )
+      : await http
+          .get(Uri.parse('https://caderno-campo.herokuapp.com/quadra/all'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,

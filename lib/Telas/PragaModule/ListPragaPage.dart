@@ -1,50 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:updatetest_nulableversion/Controladores/PortaEnxertoModule/GetPortaEnxertoList.dart';
-import 'package:updatetest_nulableversion/Model/CultivarModel.dart';
-import 'package:updatetest_nulableversion/Model/PortaEnxertoModel.dart';
-import 'package:updatetest_nulableversion/Model/QuadraModel.dart';
-import 'package:updatetest_nulableversion/Telas/CultivarQuadraModule/AddPageCultivarQuadra.dart';
-import 'package:updatetest_nulableversion/Telas/PortaEnxertoModule/AddPagePortaEnxerto.dart';
-import 'package:updatetest_nulableversion/Telas/PortaEnxertoModule/UpdatePagePortaEnxerto.dart';
+import 'package:updatetest_nulableversion/Controladores/PragaModule/GetPragaList.dart';
+import 'package:updatetest_nulableversion/Model/PragaModel.dart';
+import 'package:updatetest_nulableversion/Model/ProdutorModel.dart';
+import 'package:updatetest_nulableversion/Telas/PomarModule/AddPagePomar.dart';
 import 'package:updatetest_nulableversion/Telas/PragaModule/AddPagePraga.dart';
 import 'package:updatetest_nulableversion/Telas/PragaModule/DeletePagePraga.dart';
 
-class ListPortaEnxertoPage extends StatefulWidget {
+import 'UpdatePagePraga.dart';
+
+class ListPragasPage extends StatefulWidget {
   final bool? ativarBotoes;
-  final Quadra? idQuadra;
-  final Cultivar? idCultivar;
-  ListPortaEnxertoPage(
-      {Key? key, this.ativarBotoes, this.idQuadra, this.idCultivar})
+  final Produtor? idProdutor;
+  ListPragasPage({Key? key, this.ativarBotoes, this.idProdutor})
       : super(key: key);
   @override
-  _ListPortaEnxertoPageState createState() =>
-      _ListPortaEnxertoPageState(ativarBotoes, idQuadra, idCultivar);
+  _ListPragasPageState createState() =>
+      _ListPragasPageState(ativarBotoes, idProdutor);
 }
 
-class _ListPortaEnxertoPageState extends State<ListPortaEnxertoPage> {
-  Future<List<PortaEnxerto>>? _futurePortaEnxerto;
+class _ListPragasPageState extends State<ListPragasPage> {
+  Future<List<Praga>>? _futurePraga;
   late bool ativarCampos = false;
-  late Quadra idQuadra = new Quadra();
-  late Cultivar idCultivar = new Cultivar();
-
-  _ListPortaEnxertoPageState(
-      bool? ativarCampos, Quadra? idQuadra, Cultivar? idCultivar) {
+  late Produtor idProdutor = new Produtor();
+  _ListPragasPageState(bool? ativarCampos, Produtor? idProdutor) {
     if (ativarCampos != null) this.ativarCampos = ativarCampos;
-    if (idQuadra != null) this.idQuadra = idQuadra;
-    if (idCultivar != null) this.idCultivar = idCultivar;
+    if (idProdutor != null) this.idProdutor = idProdutor;
   }
 
   @override
   void initState() {
     super.initState();
-    _futurePortaEnxerto = fetchPortaEnxertoList();
+    _futurePraga = fetchPragaList();
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Mostrar Porta Enxertos',
+      title: 'Mostrar Pragas',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -55,7 +48,7 @@ class _ListPortaEnxertoPageState extends State<ListPortaEnxertoPage> {
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AddPagePortaEnxerto(),
+                  builder: (context) => AddPagePraga(),
                 ),
               ),
               icon: Icon(
@@ -68,16 +61,16 @@ class _ListPortaEnxertoPageState extends State<ListPortaEnxertoPage> {
             icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          title: const Text('Lista de Porta Enxertos'),
+          title: const Text('Lista de Pragas'),
         ),
         body: Center(
-          child: FutureBuilder<List<PortaEnxerto>>(
-            future: _futurePortaEnxerto,
+          child: FutureBuilder<List<Praga>>(
+            future: _futurePraga,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                List<PortaEnxerto>? portaEnxertos = snapshot.data;
+                List<Praga>? pragas = snapshot.data;
                 return ListView.builder(
-                    itemCount: portaEnxertos!.length,
+                    itemCount: pragas!.length,
                     itemBuilder: (BuildContext context, int index) {
                       if (ativarCampos == true) {
                         return ListTile(
@@ -93,9 +86,8 @@ class _ListPortaEnxertoPageState extends State<ListPortaEnxertoPage> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => DeletePagePraga(
-                                          idUsuario: portaEnxertos[index]
-                                              .id
-                                              .toString())),
+                                          idUsuario:
+                                              pragas[index].id.toString())),
                                 ),
                               ),
                               IconButton(
@@ -106,23 +98,21 @@ class _ListPortaEnxertoPageState extends State<ListPortaEnxertoPage> {
                                 onPressed: () => Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          UpdatePagePortaEnxerto(
-                                              idUsuario: portaEnxertos[index]
-                                                  .id
-                                                  .toString())),
+                                      builder: (context) => UpdatePagePraga(
+                                          idUsuario:
+                                              pragas[index].id.toString())),
                                 ),
                               ),
                             ],
                           ),
-                          title: Text(portaEnxertos[index].nome!),
+                          title: Text(pragas[index].nome),
                         );
                       } else {
                         return ListTile(
                           trailing: Wrap(
                             spacing: 12,
                             children: [
-                              IconButton(
+                              /*IconButton(
                                 icon: Icon(
                                   Icons.add,
                                   size: 30,
@@ -130,17 +120,14 @@ class _ListPortaEnxertoPageState extends State<ListPortaEnxertoPage> {
                                 onPressed: () => Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          AddPageCultivarQuadra(
-                                              idQuadra: idQuadra,
-                                              idCultivar: idCultivar,
-                                              idPortaEnxerto:
-                                                  portaEnxertos[index])),
+                                      builder: (context) => AddPagePomar(
+                                          idProdutor: idProdutor,
+                                          idPraga: Pragas[index])),
                                 ),
-                              ),
+                              ),*/
                             ],
                           ),
-                          title: Text(portaEnxertos[index].nome!),
+                          title: Text(pragas[index].nome),
                         );
                       }
                     });

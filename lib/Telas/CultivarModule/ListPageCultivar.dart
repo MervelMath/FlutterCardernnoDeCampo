@@ -1,18 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:updatetest_nulableversion/Controladores/CultivarModule/GetCultivarList.dart';
+import 'package:updatetest_nulableversion/Controladores/PragaModule/GetPragaList.dart';
 import 'package:updatetest_nulableversion/Model/CultivarModel.dart';
+import 'package:updatetest_nulableversion/Model/PragaModel.dart';
+import 'package:updatetest_nulableversion/Model/ProdutorModel.dart';
+import 'package:updatetest_nulableversion/Model/QuadraModel.dart';
 import 'package:updatetest_nulableversion/Telas/CultivarModule/AddPageCultivar.dart';
+import 'package:updatetest_nulableversion/Telas/CultivarModule/UpdatePageCultivar.dart';
+import 'package:updatetest_nulableversion/Telas/PomarModule/AddPagePomar.dart';
+import 'package:updatetest_nulableversion/Telas/PortaEnxertoModule/ListPagePortaEnxerto.dart';
+import 'package:updatetest_nulableversion/Telas/PragaModule/AddPagePraga.dart';
+import 'package:updatetest_nulableversion/Telas/PragaModule/DeletePagePraga.dart';
 
-import 'DeletePageCultivar.dart';
-import 'UpdatePageCultivar.dart';
-
-class ListPageCultivar extends StatefulWidget {
+class ListCultivarPage extends StatefulWidget {
+  final bool? ativarBotoes;
+  final Quadra? idQuadra;
+  ListCultivarPage({Key? key, this.ativarBotoes, this.idQuadra})
+      : super(key: key);
   @override
-  _ListPageCultivarState createState() => _ListPageCultivarState();
+  _ListCultivarPageState createState() =>
+      _ListCultivarPageState(ativarBotoes, idQuadra);
 }
 
-class _ListPageCultivarState extends State<ListPageCultivar> {
+class _ListCultivarPageState extends State<ListCultivarPage> {
   Future<List<Cultivar>>? _futureCultivar;
+  late bool ativarCampos = false;
+  late Quadra idQuadra = new Quadra();
+  _ListCultivarPageState(bool? ativarCampos, Quadra? idQuadra) {
+    if (ativarCampos != null) this.ativarCampos = ativarCampos;
+    if (idQuadra != null) this.idQuadra = idQuadra;
+  }
 
   @override
   void initState() {
@@ -24,7 +41,7 @@ class _ListPageCultivarState extends State<ListPageCultivar> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Lista de Porta Enxerto',
+      title: 'Mostrar Cultivar',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -48,18 +65,19 @@ class _ListPageCultivarState extends State<ListPageCultivar> {
             icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          title: const Text('Lista de Porta Enxertos'),
+          title: const Text('Lista de Cultivares'),
         ),
         body: Center(
           child: FutureBuilder<List<Cultivar>>(
             future: _futureCultivar,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                List<Cultivar>? produtores = snapshot.data;
+                List<Cultivar>? cultivares = snapshot.data;
                 return ListView.builder(
-                    itemCount: produtores!.length,
+                    itemCount: cultivares!.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return ListTile(
+                      if (ativarCampos == true) {
+                        return ListTile(
                           trailing: Wrap(
                             spacing: 12,
                             children: [
@@ -71,9 +89,9 @@ class _ListPageCultivarState extends State<ListPageCultivar> {
                                 onPressed: () => Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => DeletePageCultivar(
+                                      builder: (context) => DeletePagePraga(
                                           idUsuario:
-                                              produtores[index].id.toString())),
+                                              cultivares[index].id.toString())),
                                 ),
                               ),
                               IconButton(
@@ -86,13 +104,38 @@ class _ListPageCultivarState extends State<ListPageCultivar> {
                                   MaterialPageRoute(
                                       builder: (context) => UpdatePageCultivar(
                                           idUsuario:
-                                              produtores[index].id.toString())),
+                                              cultivares[index].id.toString())),
                                 ),
                               ),
                             ],
                           ),
-                          leading: Icon(Icons.account_circle, size: 40),
-                          title: Text(produtores[index].nome));
+                          title: Text(cultivares[index].nome!),
+                        );
+                      } else {
+                        return ListTile(
+                          trailing: Wrap(
+                            spacing: 12,
+                            children: [
+                              IconButton(
+                                icon: Icon(
+                                  Icons.add,
+                                  size: 30,
+                                ),
+                                onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ListPortaEnxertoPage(
+                                        ativarBotoes: false,
+                                        idQuadra: idQuadra,
+                                        idCultivar: cultivares[index]),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          title: Text(cultivares[index].nome!),
+                        );
+                      }
                     });
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');

@@ -36,7 +36,7 @@ class _AddPageQuadraState extends State<AddPageQuadra> {
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: Text(
-          "Cadastro de Pomar",
+          "Cadastro de Quadra",
           style: TextStyle(
               fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
         ),

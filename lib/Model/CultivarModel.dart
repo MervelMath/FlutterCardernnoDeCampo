@@ -10,12 +10,12 @@ String cultivarToJson(Cultivar data) => json.encode(data.toJson());
 
 class Cultivar {
   Cultivar({
-    required this.id,
-    required this.nome,
+    this.id,
+    this.nome,
   });
 
-  int id;
-  String nome;
+  int? id;
+  String? nome;
 
   factory Cultivar.fromJson(Map<String, dynamic> json) => Cultivar(
         id: json["id"],

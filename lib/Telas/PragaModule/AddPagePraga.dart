@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:updatetest_nulableversion/Controladores/PortaEnxertoModule/AddPortaEnxerto.dart';
-import 'package:updatetest_nulableversion/Model/PortaEnxertoModel.dart';
-
+import 'package:updatetest_nulableversion/Controladores/PragaModule/AddPraga.dart';
+import 'package:updatetest_nulableversion/Controladores/TecnicoModule/AddTecnico.dart';
+import 'package:updatetest_nulableversion/Model/PragaModel.dart';
+import 'package:updatetest_nulableversion/Model/TecnicoModel.dart';
 import '../../WidgetsPersonalizados/TextFieldPersonalizado.dart';
 
-class AddPagePortaEnxerto extends StatefulWidget {
+class AddPagePraga extends StatefulWidget {
   @override
-  _AddPagePortaEnxertoState createState() => _AddPagePortaEnxertoState();
+  _AddPagePragaState createState() => _AddPagePragaState();
 }
 
-class _AddPagePortaEnxertoState extends State<AddPagePortaEnxerto> {
+class _AddPagePragaState extends State<AddPagePraga> {
   final TextEditingController nomeController = TextEditingController();
-  Future<PortaEnxerto>? _futureProdutor;
+  Future<Praga>? _futurePraga;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: Text(
-          "Cadastro de Porta Enxerto",
+          "Cadastro de Praga",
           style: TextStyle(
               fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
         ),
@@ -45,14 +46,16 @@ class _AddPagePortaEnxertoState extends State<AddPagePortaEnxerto> {
             SizedBox(
               height: 22,
             ),
-            _futureProdutor == null ? Container() : Text("Funcionou!!"),
+            _futurePraga == null ? Container() : Text("Funcionou!!"),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           setState(() {
-            _futureProdutor = criarPortaEnxerto(nomeController.text);
+            _futurePraga = criarPraga(
+              nomeController.text,
+            );
           });
         },
         child: Icon(Icons.arrow_forward_ios_sharp),

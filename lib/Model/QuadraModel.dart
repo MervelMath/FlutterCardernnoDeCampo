@@ -12,20 +12,20 @@ String quadraToJson(Quadra data) => json.encode(data.toJson());
 
 class Quadra {
   Quadra({
-    required this.id,
-    required this.anoPlantio,
-    required this.distanciaFilas,
-    required this.distanciaPlantas,
-    required this.quantidadeColmeias,
-    required this.pomar,
+    this.id,
+    this.anoPlantio,
+    this.distanciaFilas,
+    this.distanciaPlantas,
+    this.quantidadeColmeias,
+    this.pomar,
   });
 
-  int id;
-  int anoPlantio;
-  int distanciaFilas;
-  int distanciaPlantas;
-  int quantidadeColmeias;
-  Pomar pomar;
+  int? id;
+  int? anoPlantio;
+  int? distanciaFilas;
+  int? distanciaPlantas;
+  int? quantidadeColmeias;
+  Pomar? pomar;
 
   factory Quadra.fromJsonId(Map<String, dynamic> json) => Quadra(
         id: json["id"],
@@ -51,6 +51,6 @@ class Quadra {
         "distanciaFilas": distanciaFilas,
         "distanciaPlantas": distanciaPlantas,
         "quantidadeColmeias": quantidadeColmeias,
-        "pomar": pomar.toJson(),
+        "pomar": pomar!.toJson(),
       };
 }

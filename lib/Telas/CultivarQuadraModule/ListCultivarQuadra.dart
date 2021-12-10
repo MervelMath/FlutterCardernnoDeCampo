@@ -1,28 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:updatetest_nulableversion/Controladores/QuadraModule/GetQuadraList.dart';
+import 'package:updatetest_nulableversion/Controladores/CultivarQuadraModel/GetCultivarQuadraList.dart';
+import 'package:updatetest_nulableversion/Controladores/PomarModule/GetPomarList.dart';
+import 'package:updatetest_nulableversion/Model/CultivarQuadraModel.dart';
 import 'package:updatetest_nulableversion/Model/PomarModel.dart';
+import 'package:updatetest_nulableversion/Model/ProdutorModel.dart';
 import 'package:updatetest_nulableversion/Model/QuadraModel.dart';
-import 'package:updatetest_nulableversion/Telas/CultivarQuadraModule/ListCultivarQuadra.dart';
-import 'package:updatetest_nulableversion/Telas/QuadraModule/AddPageQuadra.dart';
-import 'package:updatetest_nulableversion/Telas/QuadraModule/DeletePageQuadra.dart';
-import 'package:updatetest_nulableversion/Telas/QuadraModule/UpdatePageQuadra.dart';
+import 'package:updatetest_nulableversion/Telas/CultivarModule/ListPageCultivar.dart';
+import 'package:updatetest_nulableversion/Telas/CultivarModule/UpdatePageCultivar.dart';
+import 'package:updatetest_nulableversion/Telas/CultivarQuadraModule/DeletePageCultivarQuadra.dart';
 
-class ListQuadrasPage extends StatefulWidget {
-  final Pomar? idUsuario;
+class ListCultivaresQuadraPage extends StatefulWidget {
+  final Quadra? idUsuario;
 
-  ListQuadrasPage({Key? key, this.idUsuario}) : super(key: key);
+  ListCultivaresQuadraPage({Key? key, this.idUsuario}) : super(key: key);
   @override
-  _ListPomarQuadrasPageState createState() =>
-      _ListPomarQuadrasPageState(idUsuario);
+  _ListCultivaresQuadraPageState createState() =>
+      _ListCultivaresQuadraPageState(idUsuario);
 }
 
-class _ListPomarQuadrasPageState extends State<ListQuadrasPage> {
-  Future<List<Quadra>>? _futureQuadra;
+class _ListCultivaresQuadraPageState extends State<ListCultivaresQuadraPage> {
+  Future<List<CultivarQuadra>>? _futureCultivarQuadra;
 
-  late Pomar pomar = new Pomar();
+  late Quadra quadra = new Quadra();
   late String id = "0";
-  _ListPomarQuadrasPageState(Pomar? idUsuario) {
-    if (idUsuario != null) pomar = idUsuario;
+  _ListCultivaresQuadraPageState(Quadra? idUsuario) {
+    if (idUsuario != null) quadra = idUsuario;
     this.id = idUsuario!.id.toString();
   }
 
@@ -30,16 +32,16 @@ class _ListPomarQuadrasPageState extends State<ListQuadrasPage> {
   void initState() {
     super.initState();
     if (id != "0")
-      _futureQuadra = fetchQuadraList(id);
+      _futureCultivarQuadra = fetchCultivarQuadraList(id);
     else
-      _futureQuadra = fetchQuadraList("0");
+      _futureCultivarQuadra = fetchCultivarQuadraList("0");
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Lista de Quadras',
+      title: 'Lista de Cultivares Quadra',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -50,8 +52,9 @@ class _ListPomarQuadrasPageState extends State<ListQuadrasPage> {
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AddPageQuadra(
-                    idPomar: pomar,
+                  builder: (context) => ListCultivarPage(
+                    ativarBotoes: false,
+                    idQuadra: quadra,
                   ),
                 ),
               ),
@@ -65,32 +68,46 @@ class _ListPomarQuadrasPageState extends State<ListQuadrasPage> {
             icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          title: const Text('Lista de Quadras'),
+          title: const Text('Lista de CultivaresQuadra'),
         ),
         body: Center(
-          child: FutureBuilder<List<Quadra>>(
-            future: _futureQuadra,
+          child: FutureBuilder<List<CultivarQuadra>>(
+            future: _futureCultivarQuadra,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                List<Quadra>? quadras = snapshot.data;
+                List<CultivarQuadra>? cultQuadras = snapshot.data;
                 return ListView.builder(
-                    itemCount: quadras!.length,
+                    itemCount: cultQuadras!.length,
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
                         trailing: Wrap(
                           spacing: 12,
                           children: [
+                            /*IconButton(
+                              icon: Icon(
+                                Icons.yard,
+                                size: 30,
+                              ),
+                              onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ListQuadrasPage(
+                                        idUsuario: cultQuadras[index])),
+                              ),
+                            ),*/
                             IconButton(
                               icon: Icon(
-                                Icons.local_florist_rounded,
+                                Icons.delete,
                                 size: 30,
                               ),
                               onPressed: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        ListCultivaresQuadraPage(
-                                            idUsuario: quadras[index])),
+                                        DeletePageCultivarQuadra(
+                                            idUsuario: cultQuadras[index]
+                                                .id
+                                                .toString())),
                               ),
                             ),
                             IconButton(
@@ -101,30 +118,16 @@ class _ListPomarQuadrasPageState extends State<ListQuadrasPage> {
                               onPressed: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => UpdatePageQuadra(
-                                        id: quadras[index].id.toString())),
-                              ),
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.delete,
-                                size: 30,
-                              ),
-                              onPressed: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DeletePageQuadra(
-                                        idQuadra:
-                                            quadras[index].id.toString())),
+                                    builder: (context) => UpdatePageCultivar(
+                                        idUsuario:
+                                            cultQuadras[index].id.toString())),
                               ),
                             ),
                           ],
                         ),
                         leading: Icon(Icons.account_circle, size: 40),
-                        title: Text(quadras[index].pomar!.nome!),
-                        subtitle: Text(
-                            quadras[index].quantidadeColmeias.toString() +
-                                "colméias"),
+                        title: Text(cultQuadras[index].cultivar.nome!),
+                        subtitle: Text(cultQuadras[index].quadra!.pomar!.nome!),
                       );
                     });
               } else if (snapshot.hasError) {

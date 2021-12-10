@@ -1,17 +1,24 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:updatetest_nulableversion/Model/CultivarModel.dart';
 import 'package:updatetest_nulableversion/Model/CultivarQuadraModel.dart';
 import 'package:updatetest_nulableversion/Model/PortaEnxertoModel.dart';
 import 'dart:async';
 
-Future<CultivarQuadra> criarCultivarQuadra(String nome) async {
+import 'package:updatetest_nulableversion/Model/QuadraModel.dart';
+
+Future<CultivarQuadra> criarCultivarQuadra(Quadra quadra, PortaEnxerto enxerto,
+    Cultivar cultivar, int quantidade) async {
   final response = await http.post(
     Uri.parse('https://caderno-campo.herokuapp.com/cultivarQuadra'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
-    body: jsonEncode(<String, String>{
-      "nome": nome,
+    body: jsonEncode(<String, dynamic>{
+      "enxerto": enxerto.toJson(),
+      "quadra": quadra.toJson(),
+      "cultivar": cultivar.toJson(),
+      "quantidade": quantidade,
     }),
   );
 

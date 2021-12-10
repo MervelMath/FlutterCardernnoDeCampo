@@ -7,12 +7,12 @@ String portaEnxertoToJson(PortaEnxerto data) => json.encode(data.toJson());
 
 class PortaEnxerto {
   PortaEnxerto({
-    required this.id,
-    required this.nome,
+    this.id,
+    this.nome,
   });
 
-  int id;
-  String nome;
+  int? id;
+  String? nome;
 
   factory PortaEnxerto.fromJson(Map<String, dynamic> json) => PortaEnxerto(
         id: json["id"],

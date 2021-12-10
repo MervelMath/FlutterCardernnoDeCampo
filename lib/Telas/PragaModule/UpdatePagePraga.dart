@@ -1,54 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:updatetest_nulableversion/Controladores/CultivarQuadraModel/GetCultivarQuadra.dart';
-import 'package:updatetest_nulableversion/Controladores/CultivarQuadraModel/UpdateCultivarQuadra.dart';
-import 'package:updatetest_nulableversion/Model/CultivarQuadraModel.dart';
+import 'package:updatetest_nulableversion/Controladores/PragaModule/GetPraga.dart';
+import 'package:updatetest_nulableversion/Controladores/PragaModule/UpdatePraga.dart';
+import 'package:updatetest_nulableversion/Model/PragaModel.dart';
 
 import '../../WidgetsPersonalizados/TextFieldPersonalizado.dart';
 
-class UpdatePageCultivarQuadra extends StatefulWidget {
+class UpdatePagePraga extends StatefulWidget {
   final String?
       idUsuario; //preciso rever a necessidade desse parâmetro ser opcional.
 
-  UpdatePageCultivarQuadra({Key? key, this.idUsuario}) : super(key: key);
+  UpdatePagePraga({Key? key, this.idUsuario}) : super(key: key);
 
   @override
-  _UpdatePageCultivarQuadraState createState() =>
-      _UpdatePageCultivarQuadraState(idUsuario!);
+  _UpdatePageState createState() => _UpdatePageState(idUsuario!);
 }
 
-class _UpdatePageCultivarQuadraState extends State<UpdatePageCultivarQuadra> {
+class _UpdatePageState extends State<UpdatePagePraga> {
   final TextEditingController nomeController = TextEditingController();
-  late Future<CultivarQuadra> _futureCultivarQuadra;
+  Future<Praga>? _futurePraga;
 
   late String id = "0";
-  _UpdatePageCultivarQuadraState(String idUsuario) {
+  _UpdatePageState(String idUsuario) {
     id = idUsuario;
   }
 
   @override
   void initState() {
     super.initState();
-    _futureCultivarQuadra = fetchCultivarQuadra(id);
+    _futurePraga = fetchPraga(id);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Atualizar Porta Enxerto'),
+        title: Text('Update Data Example'),
       ),
       body: Container(
         alignment: Alignment.center,
         padding: const EdgeInsets.all(8.0),
-        child: FutureBuilder<CultivarQuadra>(
-          future: _futureCultivarQuadra,
+        child: FutureBuilder<Praga>(
+          future: _futurePraga,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData) {
-                nomeController.text = snapshot.data!.cultivar.nome!;
+                nomeController.text = snapshot.data!.nome;
                 return ListView(
                   children: <Widget>[
-                    Text(snapshot.data!.cultivar.nome!),
+                    Text(snapshot.data!.nome),
                     SizedBox(
                       height: 20,
                     ),
@@ -69,12 +68,13 @@ class _UpdatePageCultivarQuadraState extends State<UpdatePageCultivarQuadra> {
                     ElevatedButton(
                       onPressed: () {
                         setState(() {
-                          _futureCultivarQuadra = updateCultivarQuadra(
-                              snapshot.data!.id.toString(),
-                              nomeController.text);
+                          _futurePraga = updatePraga(
+                            snapshot.data!.id.toString(),
+                            nomeController.text,
+                          );
                         });
                       },
-                      child: Text('Atualizar Porta Enxerto'),
+                      child: Text('Atualizar Praga'),
                     ),
                   ],
                 );

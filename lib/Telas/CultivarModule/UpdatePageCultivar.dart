@@ -44,10 +44,10 @@ class _UpdatePageCultivarState extends State<UpdatePageCultivar> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData) {
-                nomeController.text = snapshot.data!.nome;
+                nomeController.text = snapshot.data!.nome!;
                 return ListView(
                   children: <Widget>[
-                    Text(snapshot.data!.nome),
+                    Text(snapshot.data!.nome!),
                     SizedBox(
                       height: 20,
                     ),
