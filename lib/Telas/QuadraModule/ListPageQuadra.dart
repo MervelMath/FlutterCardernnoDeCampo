@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:updatetest_nulableversion/Controladores/QuadraModule/GetQuadraList.dart';
 import 'package:updatetest_nulableversion/Model/PomarModel.dart';
 import 'package:updatetest_nulableversion/Model/QuadraModel.dart';
+import 'package:updatetest_nulableversion/Telas/ArmadilhaModule/ListPageArmadilha.dart';
 import 'package:updatetest_nulableversion/Telas/CultivarQuadraModule/ListCultivarQuadra.dart';
 import 'package:updatetest_nulableversion/Telas/QuadraModule/AddPageQuadra.dart';
 import 'package:updatetest_nulableversion/Telas/QuadraModule/DeletePageQuadra.dart';
@@ -103,6 +104,18 @@ class _ListPomarQuadrasPageState extends State<ListQuadrasPage> {
                                 MaterialPageRoute(
                                     builder: (context) => UpdatePageQuadra(
                                         id: quadras[index].id.toString())),
+                              ),
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.tram_sharp,
+                                size: 30,
+                              ),
+                              onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ListArmadilhasPage(
+                                        idUsuario: quadras[index])),
                               ),
                             ),
                             IconButton(
